@@ -33,16 +33,16 @@ function renderAllShapes() {
   // Clear the canvas
   // console.log("Came here, going to draw the body");
 
-  var globalRotate = new Matrix4().rotate(g_globalAngle, g_globalAngleVertical, 1, 0);
+  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
 
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
   var body = new Cube();
-  body.color = [1.0, 0.0, 0.0, 1.0];
-  body.matrix.setTranslate(0.0, 0.0, 0.0);
+  body.color = [249/255, 189/255, 60/255, 1.0];
+  body.matrix.setTranslate(-0.5, -0.5, -0.5);
   // body.matrix.rotate(45, 0, 0, 1);
-  body.matrix.scale(0.6, 0.6, 0.6);
+  body.matrix.scale(0.5, 0.5, 0.5);
   body.render();
 
 }
