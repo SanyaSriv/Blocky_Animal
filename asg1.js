@@ -60,19 +60,25 @@ function renderAllShapes() {
   // Clear the canvas
   gl.clear(gl.COLOR_BUFFER_BIT);
   // // check if we also need to draw the image: butterfly so butterfly does not get erased when we are painting over it
-  var len = g_points_array.length;
-  for(var i = 0; i < len; i++) {
-    if (g_points_array[i] == DRAW_BUTTERFLY_NOW) {
-      // we need to draw the butterfly now
-      for (var j = 0; j < image_array.length; j ++) {
-        gl.uniform4f(u_FragColor, image_array[j][0][0], image_array[j][0][1], image_array[j][0][2], image_array[j][0][3]);
-        drawTriangles(image_array[j][1]);
-      }
-    } else {
-      // we need to draw the user clicked point
-      g_points_array[i].render();
-    }
-  }
+  // var len = g_points_array.length;
+  // for(var i = 0; i < len; i++) {
+  //   if (g_points_array[i] == DRAW_BUTTERFLY_NOW) {
+  //     // we need to draw the butterfly now
+  //     for (var j = 0; j < image_array.length; j ++) {
+  //       gl.uniform4f(u_FragColor, image_array[j][0][0], image_array[j][0][1], image_array[j][0][2], image_array[j][0][3]);
+  //       drawTriangles(image_array[j][1]);
+  //     }
+  //   } else {
+  //     // we need to draw the user clicked point
+  //     g_points_array[i].render();
+  //   }
+  // }
+  gl.uniform4f(u_FragColor, 1.0, 0.0, 0.0, 1.0);
+  drawTriangles3D([-1.0,0.0,0.0, -0.5,-1.0,0.0,  0.0,0.0,0.0]);
+
+  var body = new Cube();
+  body.color = [1.0, 0.0, 0.0, 1.0];
+  body.render();
 }
 
 // for selecting the right color and adding it to g_colors
@@ -245,11 +251,12 @@ function main() {
   // AddActionsToHtmlUI(); // removing event listeners because it is massively slowing down the program
 
   // Register function (event handler) to be called on a mouse press
-  canvas.onmousedown = function(ev){ click(ev) };
-  canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
+  // canvas.onmousedown = function(ev){ click(ev) };
+  // canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear the canvas
   gl.clear(gl.COLOR_BUFFER_BIT);
+  renderAllShapes();
 }
