@@ -22,6 +22,7 @@ let a_Position;
 let u_PointSize;
 let u_FragColor;
 let g_globalAngle = 0;
+let g_globalAngleVertical = 0;
 let u_GlobalRotateMatrix;
 let u_ModelMatrix = [];
 
@@ -32,15 +33,16 @@ function renderAllShapes() {
   // Clear the canvas
   // console.log("Came here, going to draw the body");
 
-  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+  var globalRotate = new Matrix4().rotate(g_globalAngle, g_globalAngleVertical, 1, 0);
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
 
-  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
   var body = new Cube();
   body.color = [1.0, 0.0, 0.0, 1.0];
-  body.matrix.translate(-0.25, -0.75, 0.0);
-  body.matrix.scale(0.5, 0.3, 0.5);
+  body.matrix.setTranslate(0.0, 0.0, 0.0);
+  // body.matrix.rotate(45, 0, 0, 1);
+  body.matrix.scale(0.6, 0.6, 0.6);
   body.render();
 
 }
@@ -50,6 +52,7 @@ function renderAllShapes() {
 function AddActionsToHtmlUI() {
   // listener for camera angle
   document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; renderAllShapes();});
+  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; renderAllShapes();});
 
 }
 
@@ -63,7 +66,7 @@ function setupWebGL() {
     return;
   }
 
-  // gl.enable(gl.DEPTH_TEST);
+  gl.enable(gl.DEPTH_TEST);
 }
 
 // compile the shader programs, attach the javascript variables to the GLSL variables
