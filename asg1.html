@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        p{float:right;clear:right;display:block;padding-right: 55px;padding-top: 15px; text-align: left;}
+    </style>
+  <head>
+    <meta charset="utf-8" />
+    <title>Change a point color</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+    <img src="Butterfly_image.png" alt="Butterly diagram with the triangles labeled" width="400" height = "400"
+      style="float:right; padding-right: 170px; padding-top: 40px; position: static;"></img>
+    <p> For drawing a picture, I made a butterfly. Click on the "Draw a Butterfly" button to render the picture.
+    <br> For the awesomness part, I implemented 2 things:
+    <br>  - Paint transparency: We can use the transparency slider to make the color of the shape transparent.
+    <br>  - Pizza shaped paint brush: Click on the Button "Pizza paint brush" to use it. This brush draws pizzas!
+    <br> Note: We can make all the other shapes transparent (Circle, Square, Triangle) except the pizzas.
+    </p>
+    <script src="lib/webgl-utils.js"></script>
+    <script src="lib/webgl-debug.js"></script>
+    <script src="lib/cuon-utils.js"></script>
+    <script src="asg1.js"></script>
+    <script src="point.js"></script>
+    <script src="triangle.js"></script>
+    <script src="circle.js"></script>
+    <br><br>
+    <input type="button" value="Clear Canvas" onclick="clearCanvas()"></input>
+    <br><br>
+    <label for="drawing_mode">Drawing Mode:</label>
+    <br> <br>
+    <input type="button" id="Square" value="Square" onclick="ChangeShapeToSquare()"></input>
+    <input type="button" id="Triangle" value="Triangle" onclick="ChangeShapeToTriangle()"></input>
+    <input type="button" id="Circle" value="Circle" onclick="ChangeShapeToCircle()"></input>
+    <input type="button" id="Butterfly" value="Draw a Butterfly" onclick="butterfly()"></input>
+    <input type="button" id="Pizza_paint_brush" value="Pizza paint brush" onclick="ChangeShapeToPizza()"></input>
+    <br> <br>
+    <label for="name">Shape Color:</label>
+    <br><br>
+    <label for="name">Red</label>
+    <input type="range" id="color_red" min=0 max=100 class="slider"></input>
+    <label for="name">Green</label>
+    <input type="range" id="color_green" min=0 max=100 class="slider"></input>
+    <label for="name">Blue</label>
+    <input type="range" id="color_blue" min=0 max=100></input>
+    <br> <br>
+    <label for="name">Transparency:</label>
+    <input type="range" id="Transparency" min=0 max=100 value=0 class="slider"></input>
+    <br><br>
+    <label for="name">Shape size:</label>
+    <input type="range" id="shape_size" value=15></input>
+    <label for="name">(Circles) Segment Count:</label>
+    <input type="range" id="segment_size" min = 3 max = 50 value=15></input>
+  </body>
+</html>
