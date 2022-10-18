@@ -33,9 +33,6 @@ function renderAllShapes() {
   // Clear the canvas
   // console.log("Came here, going to draw the body");
 
-  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
-  gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
-
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
   var body = new Cube();
@@ -51,11 +48,20 @@ function renderAllShapes() {
 // this is slowing down the program
 function AddActionsToHtmlUI() {
   // listener for camera angle
-  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; renderAllShapes();});
-  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; renderAllShapes();});
+  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; setRotation();});
+  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; setRotation();});
 
 }
 
+function setRotation() {
+  // first rotate it horizontally
+  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+  // then rotate it vertically
+  globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
+  
+  gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
+  renderAllShapes();
+}
 // extract the canvas and initialize WebGL
 function setupWebGL() {
   // Retrieve <canvas> element
