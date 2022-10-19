@@ -198,8 +198,8 @@ function renderAllShapes() {
   leg_l.matrix.scale(0.5, 0.5, 0.15);
   leg_l.render();
 
-
-  // going to make Wall-E's hands
+  // todo: add movement in arms
+  // going to make Wall-E's arms
   // making left arm
   var left_arm = new Cube();
   left_arm.color = [206/255, 189/255, 180/255, 1.0];
