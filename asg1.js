@@ -76,6 +76,37 @@ function renderAllShapes() {
   w_4.matrix.scale(0.010, 0.04, 0.01);
   w_4.render();
 
+  // writing A in WALL-E
+  // first vertical line for A
+  var a_1 = new Cube();
+  a_1.color = [1,0,0, 1.0];
+  a_1.matrix.setTranslate(-0.22, -0.45, -0.6);
+  a_1.matrix.scale(0.010, 0.05, 0.01);
+  a_1.render();
+
+  // second vertical line for A
+  var a_2 = new Cube();
+  a_2.color = [1,0,0, 1.0];
+  a_2.matrix.setTranslate(-0.18, -0.45, -0.6);
+  a_2.matrix.scale(0.010, 0.05, 0.01);
+  a_2.render();
+
+  // upper top horizontal line for A
+  var a_3 = new Cube();
+  a_3.color = [1,0,0, 1.0];
+  a_3.matrix.setTranslate(-0.17, -0.41, -0.6);
+  a_3.matrix.rotate(90, 0, 0, 1);
+  a_3.matrix.scale(0.010, 0.045, 0.01);
+  a_3.render();
+
+  // middle bar for A
+  var a_4 = new Cube();
+  a_4.color = [1,0,0, 1.0];
+  a_4.matrix.setTranslate(-0.17, -0.43, -0.6);
+  a_4.matrix.rotate(90, 0, 0, 1);
+  a_4.matrix.scale(0.010, 0.045, 0.01);
+  a_4.render();
+
   // right leg
   var leg_r = new Triangle3D();
   leg_r.color = [111/255, 115/255, 117/255, 1.0];
