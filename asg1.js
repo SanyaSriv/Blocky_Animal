@@ -35,17 +35,46 @@ function renderAllShapes() {
 
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+  // main body
   var body = new Cube();
   body.color = [254/255, 175/255, 52/255, 1.0];
   body.matrix.setTranslate(-0.5, -0.5, -0.5);
   body.matrix.scale(0.5, 0.5, 0.5);
   body.render();
 
+  //body detail
   var body_detail = new Cube();
   body.color = [207/255,167/255,105/255, 1.0];
   body.matrix.setTranslate(-0.35, -0.20, -0.52);
   body.matrix.scale(0.35, 0.2, 0.03);
   body.render();
+
+  // making text on Wall-E's body - | of W
+  // writing W
+  var w_1 = new Cube();
+  w_1.color = [1,0,0, 1.0];
+  w_1.matrix.setTranslate(-0.29, -0.45, -0.6);
+  w_1.matrix.scale(0.010, 0.05, 0.01);
+  w_1.render();
+
+  var w_2 = new Cube();
+  w_2.color = [1,0,0, 1.0];
+  w_2.matrix.setTranslate(-0.27, -0.45, -0.6);
+  w_2.matrix.scale(0.010, 0.05, 0.01);
+  w_2.render();
+
+  var w_3 = new Cube();
+  w_3.color = [1,0,0, 1.0];
+  w_3.matrix.setTranslate(-0.25, -0.45, -0.6);
+  w_3.matrix.scale(0.010, 0.05, 0.01);
+  w_3.render();
+
+  var w_4 = new Cube();
+  w_4.color = [1,0,0, 1.0];
+  w_4.matrix.setTranslate(-0.25, -0.45, -0.6);
+  w_4.matrix.rotate(90, 0, 0, 1);
+  w_4.matrix.scale(0.010, 0.04, 0.01);
+  w_4.render();
 
   // right leg
   var leg_r = new Triangle3D();
