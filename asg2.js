@@ -25,8 +25,36 @@ let g_globalAngle = 0;
 let g_globalAngleVertical = 0;
 let u_GlobalRotateMatrix;
 let u_ModelMatrix = [];
+let leg_vertical_movement = 0;
 
+// // this will listen to all sliders
+// this is slowing down the program
+function AddActionsToHtmlUI() {
+  // listener for camera angle
+  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; setRotation();});
+  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; setRotation();});
+  document.getElementById("wall_e_leg_vertical").addEventListener('mousemove', function() {leg_vertical_movement = this.value; scaleVerticalLegMovement();});
+}
 
+function setRotation() {
+  // first rotate it horizontally
+  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+  // then rotate it vertically
+  globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
+
+  gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
+  renderAllShapes();
+}
+
+function scaleVerticalLegMovement() {
+  leg_vertical_movement -= 50;
+  leg_vertical_movement /= 300;
+  // setting an upper limit
+  if (leg_vertical_movement > 0.09) {
+    leg_vertical_movement = 0.09;
+  }
+  renderAllShapes();
+}
 // Function to render all shapes stored in g_points_array
 // we need a way to store how and when exactly was the butterfly drawn
 function renderAllShapes() {
@@ -176,10 +204,11 @@ function renderAllShapes() {
   e_4.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   e_4.render();
 
+  // we will be defining all code related to Wall-e's legs here
   // right leg
   var leg_r = new Triangle3D();
   leg_r.color = [111/255, 115/255, 117/255, 1.0];
-  leg_r.matrix.setTranslate(0.2, -0.65, 0.1);
+  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
   leg_r.matrix.rotate(45, 0, 1, 0);
@@ -190,7 +219,7 @@ function renderAllShapes() {
   // left leg
   var leg_l = new Triangle3D();
   leg_l.color = [111/255, 115/255, 117/255, 1.0];
-  leg_l.matrix.setTranslate(-0.50, -0.66, 0.1);
+  leg_l.matrix.setTranslate(-0.50, -0.66 + leg_vertical_movement, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_l.matrix.rotate(91, 0, 0, 1); // decides if it is inward or outward
   leg_l.matrix.rotate(45, 0, 1, 0);
@@ -217,24 +246,6 @@ function renderAllShapes() {
 
 }
 
-// // this will listen to all sliders
-// this is slowing down the program
-function AddActionsToHtmlUI() {
-  // listener for camera angle
-  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; setRotation();});
-  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; setRotation();});
-
-}
-
-function setRotation() {
-  // first rotate it horizontally
-  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
-  // then rotate it vertically
-  globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
-
-  gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
-  renderAllShapes();
-}
 // extract the canvas and initialize WebGL
 function setupWebGL() {
   // Retrieve <canvas> element
