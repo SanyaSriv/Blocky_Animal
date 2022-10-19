@@ -197,12 +197,23 @@ function renderAllShapes() {
   leg_l.matrix.rotate(-85, 1, 0, 0);
   leg_l.matrix.scale(0.5, 0.5, 0.15);
   leg_l.render();
-  // var body = new Cylinder();
-  // body.color = [249/255, 189/255, 60/255, 1.0];
-  // body.matrix.setTranslate(-0.5, -0.5, -0.5);
-  // // body.matrix.rotate(45, 0, 0, 1);
-  // body.matrix.scale(0.5, 0.5, 0.5);
-  // body.render();
+
+
+  // going to make Wall-E's hands
+  // making left arm
+  var left_arm = new Cube();
+  left_arm.color = [206/255, 189/255, 180/255, 1.0];
+  left_arm.matrix.setTranslate(0.0, -0.21, -0.2);
+  left_arm.matrix.rotate(90, 0, 1, 0);
+  left_arm.matrix.scale(0.06, 0.05, 0.10);
+  left_arm.render();
+
+  var right_arm = new Cube();
+  right_arm.color = [206/255, 189/255, 180/255, 1.0];
+  right_arm.matrix.setTranslate(-0.60, -0.21, -0.2);
+  right_arm.matrix.rotate(90, 0, 1, 0);
+  right_arm.matrix.scale(0.06, 0.05, 0.10);
+  right_arm.render();
 
 }
 
