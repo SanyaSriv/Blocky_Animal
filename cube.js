@@ -14,7 +14,6 @@ class Cube {
 
     gl.uniformMatrix4fv(u_ModelMatrix, false, this.matrix.elements);
 
-      // Draw
     // front
     drawTriangles3D([0.0,0.0,0.0,  1.0,1.0,0.0,   1.0,0.0,0.0]);
     drawTriangles3D([0.0,0.0,0.0,  0.0,1.0,0.0,   1.0,1.0,0.0]);
@@ -30,19 +29,19 @@ class Cube {
     drawTriangles3D([0.0,0.0,0.0,  0.0,1.0,0.0,   0.0,1.0,1.0]);
 
     // right
-    gl.uniform4f(u_FragColor, rgba[0] * 0.8, rgba[1] * 0.8, rgba[2] * 0.8, rgba[3]);
+    gl.uniform4f(u_FragColor, rgba[0] * 0.6, rgba[1] * 0.6, rgba[2] * 0.6, rgba[3]);
     drawTriangles3D([0.0,0.0,1.0,  0.0,1.0,1.0,   1.0,1.0,1.0]);
     // gl.uniform4f(u_FragColor, rgba[0] * 0.3, rgba[1] * 0.3, rgba[2] * 0.3, rgba[3]);
     drawTriangles3D([1.0,0.0,1.0,  0.0,0.0,1.0,   1.0,1.0,1.0]);
 
     // bottom
-    gl.uniform4f(u_FragColor, 0, 1, 0, rgba[3]);
+    gl.uniform4f(u_FragColor, rgba[0] * 0.5, rgba[1] * 0.5, rgba[2] * 0.5, rgba[3]);
     drawTriangles3D([1.0,0.0,0.0,  1.0,1.0,1.0,   1.0,1.0,0.0]);
     // gl.uniform4f(u_FragColor, rgba[0] * 0.3, rgba[1] * 0.3, rgba[2] * 0.3, rgba[3]);
     drawTriangles3D([1.0,0.0,0.0,  1.0,0.0,1.0,   1.0,1.0,1.0]);
     //
     // botton
-    gl.uniform4f(u_FragColor, 1, 1, 0, rgba[3]);
+    gl.uniform4f(u_FragColor, rgba[0] * 0.5, rgba[1] * 0.5, rgba[2] * 0.5, rgba[3]);
     drawTriangles3D([0.0,0.0,0.0,  1.0,0.0,0.0,   1.0,0.0,1.0]);
     // gl.uniform4f(u_FragColor, rgba[0] * 0.3, rgba[1] * 0.3, rgba[2] * 0.3, rgba[3]);
     drawTriangles3D([0.0,0.0,0.0,  0.0,0.0,1.0,   1.0,0.0,1.0]);

@@ -36,20 +36,20 @@ function renderAllShapes() {
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
   var body = new Cube();
-  body.color = [249/255, 189/255, 60/255, 1.0];
+  body.color = [254/255, 175/255, 52/255, 1.0];
   body.matrix.setTranslate(-0.5, -0.5, -0.5);
   body.matrix.scale(0.5, 0.5, 0.5);
   body.render();
 
   var body_detail = new Cube();
-  body.color = [1, 0, 0, 1.0];
+  body.color = [207/255,167/255,105/255, 1.0];
   body.matrix.setTranslate(-0.35, -0.20, -0.52);
   body.matrix.scale(0.35, 0.2, 0.03);
   body.render();
 
   // right leg
   var leg_r = new Triangle3D();
-  leg_r.color = [249/255, 189/255, 60/255, 1.0];
+  leg_r.color = [111/255, 115/255, 117/255, 1.0];
   leg_r.matrix.setTranslate(0.2, -0.65, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
@@ -60,7 +60,7 @@ function renderAllShapes() {
 
   // left leg
   var leg_l = new Triangle3D();
-  leg_l.color = [249/255, 189/255, 60/255, 1.0];
+  leg_l.color = [111/255, 115/255, 117/255, 1.0];
   leg_l.matrix.setTranslate(-0.50, -0.66, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_l.matrix.rotate(91, 0, 0, 1); // decides if it is inward or outward
