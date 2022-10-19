@@ -38,8 +38,13 @@ function renderAllShapes() {
   var body = new Cube();
   body.color = [249/255, 189/255, 60/255, 1.0];
   body.matrix.setTranslate(-0.5, -0.5, -0.5);
-  // body.matrix.rotate(45, 0, 0, 1);
   body.matrix.scale(0.5, 0.5, 0.5);
+  body.render();
+
+  var body_detail = new Cube();
+  body.color = [1, 0, 0, 1.0];
+  body.matrix.setTranslate(-0.35, -0.20, -0.52);
+  body.matrix.scale(0.35, 0.2, 0.03);
   body.render();
 
   // right leg
