@@ -42,6 +42,34 @@ function renderAllShapes() {
   body.matrix.scale(0.5, 0.5, 0.5);
   body.render();
 
+  // right leg
+  var leg_r = new Triangle3D();
+  leg_r.color = [249/255, 189/255, 60/255, 1.0];
+  leg_r.matrix.setTranslate(0.2, -0.65, 0.1);
+  // body.matrix.rotate(90, 1, 0, 0);
+  leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
+  leg_r.matrix.rotate(45, 0, 1, 0);
+  leg_r.matrix.rotate(-85, 1, 0, 0);
+  leg_r.matrix.scale(0.5, 0.5, 0.15);
+  leg_r.render();
+
+  // left leg
+  var leg_l = new Triangle3D();
+  leg_l.color = [249/255, 189/255, 60/255, 1.0];
+  leg_l.matrix.setTranslate(-0.50, -0.66, 0.1);
+  // body.matrix.rotate(90, 1, 0, 0);
+  leg_l.matrix.rotate(91, 0, 0, 1); // decides if it is inward or outward
+  leg_l.matrix.rotate(45, 0, 1, 0);
+  leg_l.matrix.rotate(-85, 1, 0, 0);
+  leg_l.matrix.scale(0.5, 0.5, 0.15);
+  leg_l.render();
+  // var body = new Cylinder();
+  // body.color = [249/255, 189/255, 60/255, 1.0];
+  // body.matrix.setTranslate(-0.5, -0.5, -0.5);
+  // // body.matrix.rotate(45, 0, 0, 1);
+  // body.matrix.scale(0.5, 0.5, 0.5);
+  // body.render();
+
 }
 
 // // this will listen to all sliders
@@ -58,7 +86,7 @@ function setRotation() {
   var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
   // then rotate it vertically
   globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
-  
+
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
   renderAllShapes();
 }
@@ -120,14 +148,24 @@ function connectVariablesToGLSL() {
   gl.uniformMatrix4fv(u_ModelMatrix, false, identityM.elements);
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, identityM.elements);
 }
+function click(ev) {
+  var x = ev.clientX; // x coordinate of a mouse pointer
+  var y = ev.clientY; // y coordinate of a mouse pointer
+  var z = ev.clientZ;
+  var rect = ev.target.getBoundingClientRect();
 
+  x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
+  y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
+  console.log(x, y);
+}
 function main() {
   // Setting up WebGL
   setupWebGL();
   connectVariablesToGLSL();
   // Initialize shaders
   AddActionsToHtmlUI();
-
+  canvas.onmousedown = function(ev){ click(ev) };
+  canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear the canvas
