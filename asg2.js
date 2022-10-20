@@ -26,26 +26,30 @@ let g_globalAngleVertical = 0;
 let u_GlobalRotateMatrix;
 let u_ModelMatrix = [];
 let leg_vertical_movement = 0;
-
+let arm_vertical_movement = 0;
+let arm_horizontal_movement = 0;
+let neck_front_back = 0;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
   // listener for camera angle
-  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; setRotation();});
-  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; setRotation();});
+  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; renderAllShapes();});
+  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; renderAllShapes();});
   document.getElementById("wall_e_leg_vertical").addEventListener('mousemove', function() {leg_vertical_movement = this.value; scaleVerticalLegMovement();});
+  document.getElementById("arm_vertical").addEventListener('mousemove', function() {arm_vertical_movement = this.value; scaleVerticalArmMovement();});
+  document.getElementById("neck_front_back").addEventListener('mousemove', function() {neck_front_back = this.value; renderAllShapes();})
+
 }
-
-function setRotation() {
-  // first rotate it horizontally
-  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
-  // then rotate it vertically
-  globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
-
-  gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
-  renderAllShapes();
-}
-
+// function setRotation() {
+//   // first rotate it horizontally
+//   var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+//   // then rotate it vertically
+//   globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
+//
+//   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
+//   renderAllShapes();
+// }
+//
 function scaleVerticalLegMovement() {
   leg_vertical_movement -= 50;
   leg_vertical_movement /= 300;
@@ -55,11 +59,26 @@ function scaleVerticalLegMovement() {
   }
   renderAllShapes();
 }
+//
+function scaleVerticalArmMovement() {
+  // arm_vertical_movement -= 50;
+  // arm_vertical_movement /= 300;
+  renderAllShapes();
+}
 // Function to render all shapes stored in g_points_array
 // we need a way to store how and when exactly was the butterfly drawn
 function renderAllShapes() {
   // Clear the canvas
   // console.log("Came here, going to draw the body");
+
+  // checkig for the leg movement - if it is not the default
+
+  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+  // then rotate it vertically
+  globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
+
+  gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
+
 
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -230,20 +249,33 @@ function renderAllShapes() {
   // todo: add movement in arms
   // going to make Wall-E's arms
   // making left arm
+  // TODO: Fix horizontal rotation
   var left_arm = new Cube();
   left_arm.color = [206/255, 189/255, 180/255, 1.0];
-  left_arm.matrix.setTranslate(0.0, -0.21, -0.2);
+  left_arm.matrix.setTranslate(-0.04, -0.21, -0.2);
   left_arm.matrix.rotate(90, 0, 1, 0);
-  left_arm.matrix.scale(0.06, 0.05, 0.10);
+  left_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
+  // left_arm.matrix.rotate(arm_horizontal_movement, 0, 1, 0);
+  left_arm.matrix.scale(0.06, 0.05, 0.15);
   left_arm.render();
 
   var right_arm = new Cube();
   right_arm.color = [206/255, 189/255, 180/255, 1.0];
-  right_arm.matrix.setTranslate(-0.60, -0.21, -0.2);
-  right_arm.matrix.rotate(90, 0, 1, 0);
-  right_arm.matrix.scale(0.06, 0.05, 0.10);
+  right_arm.matrix.setTranslate(-0.47, -0.21, -0.2);
+  right_arm.matrix.rotate(270, 0, 1, 0);
+  right_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
+  // right_arm.matrix.rotate(- arm_horizontal_movement, 0, 1, 0);
+  right_arm.matrix.scale(0.06, 0.05, 0.15);
   right_arm.render();
 
+  // making Wall-E's neck
+  var neck_1 = new Cube();
+  neck_1.color = [206/255, 189/255, 180/255, 1.0];
+  neck_1.matrix.setTranslate(-0.27, 0, -0.2);
+  neck_1.matrix.rotate(45, 1, 0, 0);
+  neck_1.matrix.rotate(neck_front_back, 1, 0, 0);
+  neck_1.matrix.scale(0.07, 0.11, 0.07);
+  neck_1.render();
 }
 
 // extract the canvas and initialize WebGL
