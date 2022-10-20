@@ -271,10 +271,10 @@ function renderAllShapes() {
   // making Wall-E's neck
   var neck_1 = new Cube();
   neck_1.color = [206/255, 189/255, 180/255, 1.0];
-  neck_1.matrix.setTranslate(-0.27, 0, -0.2);
-  neck_1.matrix.rotate(45, 1, 0, 0);
+  neck_1.matrix.setTranslate(-0.27, -0.05, -0.2);
+  neck_1.matrix.rotate(-25, 1, 0, 0);
   neck_1.matrix.rotate(neck_front_back, 1, 0, 0);
-  neck_1.matrix.scale(0.07, 0.11, 0.07);
+  neck_1.matrix.scale(0.07, 0.12, 0.07);
   neck_1.render();
 }
 
