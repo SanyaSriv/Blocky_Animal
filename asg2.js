@@ -266,16 +266,6 @@ function renderAllShapes() {
   left_arm.matrix.scale(0.06, 0.05, 0.12);
   left_arm.render();
 
-  var right_arm = new Cube();
-  right_arm.color = [206/255, 189/255, 180/255, 1.0];
-  right_arm.matrix.setTranslate(-0.47, -0.21, -0.2);
-  right_arm.matrix.rotate(270, 0, 1, 0);
-  right_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
-  // right_arm.matrix.rotate(- arm_horizontal_movement, 0, 1, 0);
-  var right_arm_reference_matrix = new Matrix4(right_arm.matrix);
-  right_arm.matrix.scale(0.06, 0.05, 0.12);
-  right_arm.render();
-
   // Wall-e's hands2
   // left forearm part 1
   var left_forearm_1 = new Cube()
@@ -329,9 +319,39 @@ function renderAllShapes() {
   left_hand_3.matrix.scale(0.01, 0.05, 0.11);
   left_hand_3.render()
 
-  // var right_forearm_1 = new Cube()
-  // right_forearm_1.matrix = right_arm_reference_matrix;
-  // right_forearm_1.render();
+  // going to make right arm, fore-arm and right hand
+  var right_arm = new Cube();
+  right_arm.color = [206/255, 189/255, 180/255, 1.0];
+  right_arm.matrix.setTranslate(-0.46, -0.166, -0.2);
+  right_arm.matrix.rotate(90, 0, 1, 0);
+  right_arm.matrix.rotate(180, 1, 0, 0);
+  right_arm.matrix.rotate(- arm_vertical_movement, 1, 0, 0);
+  var right_arm_reference_matrix = new Matrix4(right_arm.matrix);
+  right_arm.matrix.scale(0.06, 0.05, 0.12);
+  right_arm.render();
+
+  var right_forearm_1 = new Cube()
+  right_forearm_1.color = [213/255, 162/255, 135/255, 1.0];
+  right_forearm_1.matrix = right_arm_reference_matrix;
+  right_forearm_1.matrix.translate(0.0, 0.0, 0.11);
+  right_forearm_1.matrix.rotate(90, 0, 1, 0);
+  right_forearm_1.matrix.rotate(-25, 0, 1, 0);
+  // rotation based upon the left slider: adding this just for now
+  right_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
+  right_forearm_1.matrix.scale(0.06, 0.05, 0.20);
+  right_forearm_1.render();
+
+  // var left_forearm_1 = new Cube()
+  // left_forearm_1.color = [213/255, 162/255, 135/255, 1.0];
+  // left_forearm_1.matrix = left_arm_reference_matrix;
+  // left_forearm_1.matrix.translate(0.0, 0.0, 0.12);
+  // left_forearm_1.matrix.rotate(90, 0, 1, 0);
+  // left_forearm_1.matrix.rotate(-25, 0, 1, 0);
+  // // rotation based upon the slider
+  // left_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
+  // var left_forearm_1_reference_matrix = new Matrix4(left_forearm_1.matrix);
+  // left_forearm_1.matrix.scale(0.06, 0.05, 0.20);
+  // left_forearm_1.render();
 
   // making Wall-E's neck
   var neck_1 = new Cube();
