@@ -29,6 +29,8 @@ let leg_vertical_movement = 0;
 let arm_vertical_movement = 0;
 let arm_horizontal_movement = 0;
 let neck_front_back = 0;
+let left_forearm_rotation = 0;
+let left_forearm_scale = 100;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -37,7 +39,9 @@ function AddActionsToHtmlUI() {
   document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; renderAllShapes();});
   document.getElementById("wall_e_leg_vertical").addEventListener('mousemove', function() {leg_vertical_movement = this.value; scaleVerticalLegMovement();});
   document.getElementById("arm_vertical").addEventListener('mousemove', function() {arm_vertical_movement = this.value; scaleVerticalArmMovement();});
-  document.getElementById("neck_front_back").addEventListener('mousemove', function() {neck_front_back = this.value; renderAllShapes();})
+  document.getElementById("neck_front_back").addEventListener('mousemove', function() {neck_front_back = this.value; renderAllShapes();});
+  document.getElementById("left_forearm").addEventListener('mousemove', function() {left_forearm_rotation = this.value; renderAllShapes();});
+  document.getElementById("left_forearm_scale").addEventListener('mousemove', function() {left_forearm_scale = this.value; renderAllShapes();});
 
 }
 // function setRotation() {
@@ -256,7 +260,8 @@ function renderAllShapes() {
   left_arm.matrix.rotate(90, 0, 1, 0);
   left_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
   // left_arm.matrix.rotate(arm_horizontal_movement, 0, 1, 0);
-  left_arm.matrix.scale(0.06, 0.05, 0.15);
+  var left_arm_reference_matrix = new Matrix4(left_arm.matrix);
+  left_arm.matrix.scale(0.06, 0.05, 0.12);
   left_arm.render();
 
   var right_arm = new Cube();
@@ -265,8 +270,52 @@ function renderAllShapes() {
   right_arm.matrix.rotate(270, 0, 1, 0);
   right_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
   // right_arm.matrix.rotate(- arm_horizontal_movement, 0, 1, 0);
-  right_arm.matrix.scale(0.06, 0.05, 0.15);
+  var right_arm_reference_matrix = new Matrix4(right_arm.matrix);
+  right_arm.matrix.scale(0.06, 0.05, 0.12);
   right_arm.render();
+
+  // Wall-e's hands2
+  // left forearm part 1
+  var left_forearm_1 = new Cube()
+  left_forearm_1.color = [213/255, 162/255, 135/255, 1.0];
+  left_forearm_1.matrix = left_arm_reference_matrix;
+  left_forearm_1.matrix.translate(0.0, 0.0, 0.12);
+  left_forearm_1.matrix.rotate(90, 0, 1, 0);
+  left_forearm_1.matrix.rotate(-25, 0, 1, 0);
+  // rotation based upon the slider
+  left_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
+  var left_forearm_1_reference_matrix = new Matrix4(left_forearm_1.matrix);
+  left_forearm_1.matrix.scale(0.06, 0.05, 0.20);
+  left_forearm_1.render();
+
+  // left forearm part 2
+  var left_forearm_2 = new Cube()
+  left_forearm_2.color = [83/255, 122/255, 143/255, 1.0];
+  left_forearm_2.matrix = left_forearm_1_reference_matrix;
+  left_forearm_2.matrix.translate(0.009, 0.009, 0.198);
+  var left_forearm_2_reference_matrix = new Matrix4(left_forearm_2.matrix);
+  left_forearm_2.matrix.scale(0.03, 0.03, 0.12 * (left_forearm_scale / 100));
+  left_forearm_2.render();
+
+  // going to make the left hand now
+  var left_hand_1 = new Cube();
+  left_hand_1.matrix = left_forearm_2_reference_matrix;
+  left_hand_1.matrix.translate(0.00, 0.016, 0.12);
+  left_hand_1.matrix.scale(0.01, 0.05, 0.11);
+  left_hand_1.render();
+
+  var left_hand_2 = new Cube();
+  left_hand_2.matrix = left_forearm_2_reference_matrix;
+  left_hand_2.matrix.translate(0.0, -1.1, 0.0);
+  // left_hand_2.matrix.scale(0.01, 0.5, 0.14);
+  left_hand_2.render();
+
+  var left_hand_3 = new Cube();
+  left_hand_3.matrix = left_forearm_2_reference_matrix;
+
+  // var right_forearm_1 = new Cube()
+  // right_forearm_1.matrix = right_arm_reference_matrix;
+  // right_forearm_1.render();
 
   // making Wall-E's neck
   var neck_1 = new Cube();
