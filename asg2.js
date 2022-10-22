@@ -274,13 +274,15 @@ function renderAllShapes() {
   neck_1.matrix.setTranslate(-0.27, -0.05, -0.2);
   neck_1.matrix.rotate(-25, 1, 0, 0);
   neck_1.matrix.rotate(neck_front_back, 1, 0, 0);
+  var neck_1_reference_matrix = new Matrix4(neck_1.matrix);
   neck_1.matrix.scale(0.07, 0.128, 0.07);
   neck_1.render();
 
   var neck_2 = new Cube();
   neck_2.color = [149/255, 102/255, 72/255, 1.0];
-  neck_2.matrix.setTranslate(-0.27, 0.076, -0.245);
-  neck_2.matrix.rotate(25, 1, 0, 0);
+  neck_2.matrix = neck_1_reference_matrix;
+  neck_2.matrix.translate(0, 0.127, 0);
+  neck_2.matrix.rotate(45, 1, 0, 0);
   neck_2.matrix.scale(0.07, 0.128, 0.07);
   neck_2.render();
 }
