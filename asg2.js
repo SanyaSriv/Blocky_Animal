@@ -31,6 +31,7 @@ let arm_horizontal_movement = 0;
 let neck_front_back = 0;
 let left_forearm_rotation = 0;
 let left_forearm_scale = 100;
+let hand_open_close_movement = 0;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -42,6 +43,7 @@ function AddActionsToHtmlUI() {
   document.getElementById("neck_front_back").addEventListener('mousemove', function() {neck_front_back = this.value; renderAllShapes();});
   document.getElementById("left_forearm").addEventListener('mousemove', function() {left_forearm_rotation = this.value; renderAllShapes();});
   document.getElementById("left_forearm_scale").addEventListener('mousemove', function() {left_forearm_scale = this.value; renderAllShapes();});
+  document.getElementById("hands_open_close").addEventListener('mousemove', function() {hand_open_close_movement = this.value; renderAllShapes();});
 
 }
 // function setRotation() {
@@ -303,6 +305,10 @@ function renderAllShapes() {
   left_hand_1.color = [61/255, 85/255, 117/255, 1.0];
   left_hand_1.matrix = left_forearm_2_reference_matrix;
   left_hand_1.matrix.translate(0.00, 0.016, 0.12);
+  // this is somehow also controlling the movement for left_hand_2
+  // I suspect this is because we are reusing the left_forearm_2_reference_matrix
+  // and it is getting passed by pointers and changing
+  left_hand_1.matrix.rotate(hand_open_close_movement, 0, 1, 0);
   left_hand_1.matrix.scale(0.01, 0.05, 0.11);
   left_hand_1.render();
 
@@ -317,8 +323,10 @@ function renderAllShapes() {
   left_hand_3.matrix = left_forearm_2_reference_matrix_2;
   left_hand_3.matrix.translate(0.01, -0.01, 0.12);
   left_hand_3.matrix.rotate(45, 0, 1, 0);
+  left_hand_3.matrix.rotate(-hand_open_close_movement, 0, 1, 0);
   left_hand_3.matrix.scale(0.01, 0.05, 0.11);
   left_hand_3.render()
+
   // var right_forearm_1 = new Cube()
   // right_forearm_1.matrix = right_arm_reference_matrix;
   // right_forearm_1.render();
