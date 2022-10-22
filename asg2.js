@@ -300,12 +300,14 @@ function renderAllShapes() {
 
   // going to make the left hand now
   var left_hand_1 = new Cube();
+  left_hand_1.color = [61/255, 85/255, 117/255, 1.0];
   left_hand_1.matrix = left_forearm_2_reference_matrix;
   left_hand_1.matrix.translate(0.00, 0.016, 0.12);
   left_hand_1.matrix.scale(0.01, 0.05, 0.11);
   left_hand_1.render();
 
   var left_hand_2 = new Cube();
+  left_hand_2.color = [61/255, 85/255, 117/255, 1.0];
   left_hand_2.matrix = left_forearm_2_reference_matrix;
   left_hand_2.matrix.translate(0.0, -1.1, 0.0);
   left_hand_2.render();
