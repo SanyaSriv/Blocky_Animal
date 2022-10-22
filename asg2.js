@@ -294,6 +294,7 @@ function renderAllShapes() {
   left_forearm_2.matrix = left_forearm_1_reference_matrix;
   left_forearm_2.matrix.translate(0.009, 0.009, 0.198);
   var left_forearm_2_reference_matrix = new Matrix4(left_forearm_2.matrix);
+  var left_forearm_2_reference_matrix_2 = new Matrix4(left_forearm_2.matrix);
   left_forearm_2.matrix.scale(0.03, 0.03, 0.12 * (left_forearm_scale / 100));
   left_forearm_2.render();
 
@@ -307,12 +308,15 @@ function renderAllShapes() {
   var left_hand_2 = new Cube();
   left_hand_2.matrix = left_forearm_2_reference_matrix;
   left_hand_2.matrix.translate(0.0, -1.1, 0.0);
-  // left_hand_2.matrix.scale(0.01, 0.5, 0.14);
   left_hand_2.render();
 
   var left_hand_3 = new Cube();
-  left_hand_3.matrix = left_forearm_2_reference_matrix;
-
+  left_hand_3.color = [125/255, 143/255, 165/255, 1.0];
+  left_hand_3.matrix = left_forearm_2_reference_matrix_2;
+  left_hand_3.matrix.translate(0.01, -0.01, 0.12);
+  left_hand_3.matrix.rotate(45, 0, 1, 0);
+  left_hand_3.matrix.scale(0.01, 0.05, 0.11);
+  left_hand_3.render()
   // var right_forearm_1 = new Cube()
   // right_forearm_1.matrix = right_arm_reference_matrix;
   // right_forearm_1.render();
