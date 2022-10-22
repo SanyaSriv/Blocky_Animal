@@ -268,7 +268,7 @@ function renderAllShapes() {
 
   // Wall-e's hands2
   // left forearm part 1
-  var left_forearm_1 = new Cube()
+  var left_forearm_1 = new Cube();
   left_forearm_1.color = [213/255, 162/255, 135/255, 1.0];
   left_forearm_1.matrix = left_arm_reference_matrix;
   left_forearm_1.matrix.translate(0.0, 0.0, 0.12);
@@ -281,7 +281,7 @@ function renderAllShapes() {
   left_forearm_1.render();
 
   // left forearm part 2
-  var left_forearm_2 = new Cube()
+  var left_forearm_2 = new Cube();
   left_forearm_2.color = [83/255, 122/255, 143/255, 1.0];
   left_forearm_2.matrix = left_forearm_1_reference_matrix;
   left_forearm_2.matrix.translate(0.009, 0.009, 0.198);
@@ -330,6 +330,7 @@ function renderAllShapes() {
   right_arm.matrix.scale(0.06, 0.05, 0.12);
   right_arm.render();
 
+  // right forearm - part 1
   var right_forearm_1 = new Cube()
   right_forearm_1.color = [213/255, 162/255, 135/255, 1.0];
   right_forearm_1.matrix = right_arm_reference_matrix;
@@ -338,20 +339,49 @@ function renderAllShapes() {
   right_forearm_1.matrix.rotate(-25, 0, 1, 0);
   // rotation based upon the left slider: adding this just for now
   right_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
+  var right_forearm_1_reference_matrix = new Matrix4(right_forearm_1.matrix);
   right_forearm_1.matrix.scale(0.06, 0.05, 0.20);
   right_forearm_1.render();
 
-  // var left_forearm_1 = new Cube()
-  // left_forearm_1.color = [213/255, 162/255, 135/255, 1.0];
-  // left_forearm_1.matrix = left_arm_reference_matrix;
-  // left_forearm_1.matrix.translate(0.0, 0.0, 0.12);
-  // left_forearm_1.matrix.rotate(90, 0, 1, 0);
-  // left_forearm_1.matrix.rotate(-25, 0, 1, 0);
-  // // rotation based upon the slider
-  // left_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
-  // var left_forearm_1_reference_matrix = new Matrix4(left_forearm_1.matrix);
-  // left_forearm_1.matrix.scale(0.06, 0.05, 0.20);
-  // left_forearm_1.render();
+  // right forearm - part 2
+  var right_forearm_2 = new Cube();
+  right_forearm_2.color = [83/255, 122/255, 143/255, 1.0];
+  right_forearm_2.matrix = right_forearm_1_reference_matrix;
+  right_forearm_2.matrix.translate(0.009, 0.009, 0.198);
+  var right_forearm_2_reference_matrix = new Matrix4(right_forearm_2.matrix);
+  var right_forearm_2_reference_matrix_2 = new Matrix4(right_forearm_2.matrix);
+  // using the left one just to check: this can later have its own parameter "right_forearm_scale"
+  right_forearm_2.matrix.scale(0.03, 0.03, 0.12 * (left_forearm_scale / 100));
+  right_forearm_2.render();
+
+  // now going to make the right hand
+  var right_hand_1 = new Cube();
+  right_hand_1.color = [61/255, 85/255, 117/255, 1.0];
+  right_hand_1.matrix = right_forearm_2_reference_matrix;
+  // for now we are using the left forearm scale
+  right_hand_1.matrix.translate(0.00, 0.016, 0.12 * (left_forearm_scale / 100));
+  // this is somehow also controlling the movement for left_hand_2
+  // I suspect this is because we are reusing the left_forearm_2_reference_matrix
+  // and it is getting passed by pointers and changing
+  right_hand_1.matrix.rotate(hand_open_close_movement, 0, 1, 0);
+  right_hand_1.matrix.scale(0.01, 0.05, 0.11);
+  right_hand_1.render();
+
+  var right_hand_2 = new Cube();
+  right_hand_2.color = [61/255, 85/255, 117/255, 1.0];
+  right_hand_2.matrix = right_forearm_2_reference_matrix;
+  right_hand_2.matrix.translate(0.0, -1.1, 0.0);
+  right_hand_2.render();
+
+  var right_hand_3 = new Cube();
+  right_hand_3.color = [125/255, 143/255, 165/255, 1.0];
+  right_hand_3.matrix = right_forearm_2_reference_matrix_2;
+  // for now we are using the left_forearm_scale
+  right_hand_3.matrix.translate(0.01, -0.01, 0.12 * (left_forearm_scale / 100));
+  right_hand_3.matrix.rotate(45, 0, 1, 0);
+  right_hand_3.matrix.rotate(-hand_open_close_movement, 0, 1, 0);
+  right_hand_3.matrix.scale(0.01, 0.05, 0.11);
+  right_hand_3.render()
 
   // making Wall-E's neck
   var neck_1 = new Cube();
