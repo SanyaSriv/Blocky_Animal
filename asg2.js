@@ -102,6 +102,30 @@ function renderAllShapes() {
   body.matrix.scale(0.35, 0.2, 0.03);
   body.render();
 
+  var battery_screen = new Cube();
+  battery_screen.color = [0.0, 0.0, 0.0, 1.0];
+  battery_screen.matrix.setTranslate(-0.15, -0.15, -0.53);
+  battery_screen.matrix.scale(0.08, 0.12, 0.05);
+  battery_screen.render();
+
+  var battery_bar_1 = new Cube();
+  battery_bar_1.color = [224/255, 231/255, 34/255, 1.0];
+  battery_bar_1.matrix.translate(-0.128, -0.14, -0.54);
+  battery_bar_1.matrix.scale(0.04, 0.01, 0.01);
+  battery_bar_1.render();
+
+  var battery_bar_2 = new Cube();
+  battery_bar_2.color = [224/255, 231/255, 34/255, 1.0];
+  battery_bar_2.matrix.translate(-0.128, -0.12, -0.54);
+  battery_bar_2.matrix.scale(0.04, 0.01, 0.01);
+  battery_bar_2.render();
+
+  var battery_bar_3 = new Cube();
+  battery_bar_3.color = [224/255, 231/255, 34/255, 1.0];
+  battery_bar_3.matrix.translate(-0.128, -0.10, -0.54);
+  battery_bar_3.matrix.scale(0.04, 0.01, 0.01);
+  battery_bar_3.render();
+
   // making text on Wall-E's body - | of W
   // writing W
   var wall_e_letter_scale = 0.8;
