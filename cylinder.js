@@ -19,9 +19,9 @@ class Cylinder {
     let B = [1.0,1.0,0.0];
     let C = [1.0,0.0,0.0];
 
-    let center_x = A[0];
-    let center_y = B[1];
-    let step = 360 / 10;
+    let center_x = 0.0;
+    let center_y = 0.0;
+    let step = 360 / 30;
     let scaling_factor = 1/2;
 
     // i is the angle in this loop
@@ -42,10 +42,17 @@ class Cylinder {
       var point2_x = center_x + (Math.cos(angle2) * scaling_factor);
       var point2_y = center_y + (Math.sin(angle2) * scaling_factor);
 
+      // console.log(point0_x, point0_y, point1_x, point1_y, point2_x, point2_y);
       // Draw
-      // drawTriangles3D([0.0,0.0,0.0,  1.0,1.0,0.0,   1.0,0.0,0.0]);
-      drawTriangles([point0_x, point0_y,0,   point1_x, point1_y,0,  point2_x, point2_y,0]);
+      // front circle
+      drawTriangles3D([0.0,0.0,0.0,  point1_x, point1_y, 0.0,   point2_x,point2_y, 0.0]);
+      //back circle
+      drawTriangles3D([0.0,0.0,1.0,  point1_x, point1_y, 1.0,   point2_x,point2_y, 1.0]);
+      // connecting these 2 by 2 triangles
+      drawTriangles3D([point1_x, point1_y, 0.0,  point1_x, point1_y, 1.0,   point2_x,point2_y, 1.0]);
+      drawTriangles3D([point2_x,point2_y, 1.0,  point2_x,point2_y, 0.0,  point1_x, point1_y, 0.0,]);
     }
+
 
 }
 
