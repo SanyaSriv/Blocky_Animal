@@ -3,8 +3,9 @@ var VSHADER_SOURCE =
   `attribute vec4 a_Position;
   uniform mat4 u_ModelMatrix;
   uniform mat4 u_GlobalRotateMatrix;
+  uniform mat4 u_GlobalScaleMatrix;
   void main() {
-    gl_Position = u_GlobalRotateMatrix * u_ModelMatrix * a_Position;
+    gl_Position = u_GlobalScaleMatrix * u_GlobalRotateMatrix * u_ModelMatrix * a_Position;
   }`;
 
 // Fragment shader program
@@ -24,6 +25,7 @@ let u_FragColor;
 let g_globalAngle = 0;
 let g_globalAngleVertical = 0;
 let u_GlobalRotateMatrix;
+let u_GlobalScaleMatrix;
 let u_ModelMatrix = [];
 let leg_vertical_movement = 0;
 let arm_vertical_movement = 0;
@@ -34,6 +36,7 @@ let left_forearm_scale = 100;
 let hand_open_close_movement = 0;
 let hand_rotation = 0;
 let upper_neck_rotation = 0;
+let global_scale = 100;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -48,6 +51,7 @@ function AddActionsToHtmlUI() {
   document.getElementById("hands_open_close").addEventListener('mousemove', function() {hand_open_close_movement = this.value; renderAllShapes();});
   document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderAllShapes();});
   document.getElementById("neck_upper_rotate").addEventListener('mousemove', function() {upper_neck_rotation = this.value; renderAllShapes();});
+  document.getElementById("global_scale").addEventListener('mousemove', function() {global_scale = this.value; renderAllShapes();});
 
 }
 // function setRotation() {
@@ -89,9 +93,13 @@ function renderAllShapes() {
 
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
 
+  // setting up the scaling
+  var scaling_mat = new Matrix4().scale(global_scale / 100, global_scale / 100, global_scale / 100);
+  gl.uniformMatrix4fv(u_GlobalScaleMatrix, false, scaling_mat.elements);
 
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+  // console.log(global_scale);
   // main body
   var body = new Cube();
   body.color = [254/255, 175/255, 52/255, 1.0];
@@ -687,6 +695,12 @@ function connectVariablesToGLSL() {
     return;
   }
 
+  u_GlobalScaleMatrix = gl.getUniformLocation(gl.program, "u_GlobalScaleMatrix");
+  if (!u_GlobalScaleMatrix) {
+    console.log("Failed to get the storage location of u_GlobalScaleMatrix");
+    return;
+  }
+
   // Get the storage location of u_FragColor
   u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
   if (!u_FragColor) {
@@ -697,6 +711,7 @@ function connectVariablesToGLSL() {
   var identityM = new Matrix4();
   gl.uniformMatrix4fv(u_ModelMatrix, false, identityM.elements);
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, identityM.elements);
+  gl.uniformMatrix4fv(u_GlobalScaleMatrix, false, identityM.elements);
 }
 function click(ev) {
   var x = ev.clientX; // x coordinate of a mouse pointer
