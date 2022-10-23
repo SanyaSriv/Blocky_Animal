@@ -174,6 +174,25 @@ function renderAllShapes() {
   grill_bar_6.matrix.scale(0.037, 0.01, 0.001);
   grill_bar_6.render();
 
+  var black_lining_front = new Cube();
+  black_lining_front.color = [51/255, 53/255, 54/255, 1.0];
+  black_lining_front.matrix.translate(-0.5, -0.02, -0.53);
+  black_lining_front.matrix.scale(0.50, 0.02, 0.02);
+  black_lining_front.render();
+
+  var black_lining_right = new Cube();
+  black_lining_right.color = [51/255, 53/255, 54/255, 1.0];
+  black_lining_right.matrix.translate(-0.52, -0.021, 0);
+  black_lining_right.matrix.rotate(90, 0, 1, 0);
+  black_lining_right.matrix.scale(0.50, 0.02, 0.02);
+  black_lining_right.render();
+
+  var black_lining_left = new Cube();
+  black_lining_left.color = [51/255, 53/255, 54/255, 1.0];
+  black_lining_left.matrix.translate(0.0, -0.021, 0);
+  black_lining_left.matrix.rotate(90, 0, 1, 0);
+  black_lining_left.matrix.scale(0.50, 0.02, 0.02);
+  black_lining_left.render();
 
   // making text on Wall-E's body - | of W
   // writing W
