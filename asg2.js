@@ -239,11 +239,20 @@ function renderAllShapes() {
   leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
+  leg_r_reference_matrix = new Matrix4(leg_r.matrix);
   leg_r.matrix.rotate(45, 0, 1, 0);
   leg_r.matrix.rotate(-85, 1, 0, 0);
   leg_r.matrix.scale(0.5, 0.5, 0.15);
   leg_r.render();
 
+  // // adding cylinders in wheels
+  // var wheel_r_1 = new Cylinder()
+  // wheel_r_1.color = [104/255, 86/255, 75/255, 1.0]
+  // wheel_r_1.matrix = leg_r_reference_matrix;
+  // wheel_r_1.matrix.translate(0.12, 0.0, -0.4);
+  // wheel_r_1.matrix.rotate(90, 1, 0, 0);
+  // wheel_r_1.matrix.scale(0.2, 0.2, 0.01);
+  // wheel_r_1.render();
   // left leg
   var leg_l = new Triangle3D();
   leg_l.color = [111/255, 115/255, 117/255, 1.0];
@@ -407,6 +416,55 @@ function renderAllShapes() {
   neck_2.render();
 
   // now we need to make Wall E's eyes
+  // var right_eye = new Cylinder();
+  // right_eye.color = [127/255, 131/255, 135/255, 1.0];
+  // right_eye.matrix = neck_2_reference_matrix;
+  // right_eye.matrix.translate(-0.025, 0.165, 0.0);
+  // var right_eye_reference_matrix_2 = new Matrix4(right_eye.matrix);
+  // right_eye.matrix.scale(0.1, 0.1, 0.16);
+  // var right_eye_reference_matrix = new Matrix4(right_eye.matrix);
+  // right_eye.render();
+
+  // var right_eye = new Cylinder();
+  // right_eye.color = [127/255, 131/255, 135/255, 1.0];
+  // right_eye.matrix = neck_2_reference_matrix;
+  // right_eye.matrix.translate(-0.090, 0.165, 0.0);
+  // var right_eye_reference_matrix_2 = new Matrix4(right_eye.matrix);
+  // right_eye.matrix.scale(0.12, 0.12, 0.16);
+  // var right_eye_reference_matrix = new Matrix4(right_eye.matrix);
+  // right_eye.render();
+  //
+  // var eye_part = new Triangle3D();
+  // eye_part.color = [127/255, 131/255, 135/255, 1.0];
+  // eye_part.matrix = right_eye_reference_matrix_2;
+  // eye_part.matrix.translate(0.054, -0.0319, 0.00);
+  // eye_part.matrix.rotate(75, 0, 0, 1);
+  // eye_part.matrix.scale(0.077, 0.077, 0.16);
+  // var reff = new Matrix4(eye_part.matrix);
+  // eye_part.render();
+  //
+  // var right_inner_eye = new Cylinder();
+  // right_inner_eye.color = [193/255, 194/255, 188/255, 1.0];
+  // right_inner_eye.matrix = right_eye_reference_matrix;
+  // right_inner_eye.matrix.translate(0.0, 0.0, -0.015);
+  // right_inner_eye.matrix.scale(0.8, 0.8, 0.001);
+  // var right_inner_eye_reference_matrix = new Matrix4(right_inner_eye.matrix);
+  // right_inner_eye.render();
+
+  // var right_inner_eye_2 = new Triangle3D();
+  // right_inner_eye_2.color = [193/255, 194/255, 188/255, 1.0];
+  // right_inner_eye_2.matrix = reff;
+  // right_inner_eye_2.matrix.translate(0.15, 0.1, -0.016);
+  // right_inner_eye_2.matrix.scale(0.69, 0.69, 0.001);
+  // right_inner_eye_2.render();
+  //
+  // var right_eye_cornea = new Cylinder();
+  // right_eye_cornea.color = [9/255, 24/255, 49/255, 1.0];
+  // right_eye_cornea.matrix = right_inner_eye_reference_matrix;
+  // right_eye_cornea.matrix.translate(0.12, 0.09, -0.7);
+  // right_eye_cornea.matrix.scale(0.55, 0.55, 0.04);
+  // right_eye_cornea.render();
+
   var right_eye = new Cylinder();
   right_eye.color = [127/255, 131/255, 135/255, 1.0];
   right_eye.matrix = neck_2_reference_matrix;
