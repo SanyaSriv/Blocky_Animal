@@ -37,6 +37,10 @@ let hand_open_close_movement = 0;
 let hand_rotation = 0;
 let upper_neck_rotation = 0;
 let global_scale = 100;
+
+// global annimation variables
+let annimation_state = 0;
+let annimation_leg_rotation = 0;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -52,18 +56,11 @@ function AddActionsToHtmlUI() {
   document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderAllShapes();});
   document.getElementById("neck_upper_rotate").addEventListener('mousemove', function() {upper_neck_rotation = this.value; renderAllShapes();});
   document.getElementById("global_scale").addEventListener('mousemove', function() {global_scale = this.value; renderAllShapes();});
+  document.getElementById("annimation_on").addEventListener('mousedown', function() {annimation_state = 1;});
+  document.getElementById("annimation_off").addEventListener('mousedown', function() {annimation_state = 0;});
 
 }
-// function setRotation() {
-//   // first rotate it horizontally
-//   var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
-//   // then rotate it vertically
-//   globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
-//
-//   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
-//   renderAllShapes();
-// }
-//
+
 function scaleVerticalLegMovement() {
   leg_vertical_movement -= 50;
   leg_vertical_movement /= 300;
@@ -340,7 +337,7 @@ function renderAllShapes() {
   // right leg
   var leg_r = new Triangle3D();
   leg_r.color = [111/255, 115/255, 117/255, 1.0];
-  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement, 0.1);
+  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement + annimation_leg_rotation, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
   leg_r_reference_matrix = new Matrix4(leg_r.matrix);
@@ -644,7 +641,6 @@ function renderAllShapes() {
 }
 
 function sendTextToHTML(text, htmlID){
-  console.log("text is = ", text);
   var htmlElm = document.getElementById(htmlID);
   htmlElm.innerHTML = text;
 }
@@ -736,5 +732,28 @@ function main() {
   // Clear the canvas
   // gl.clear(gl.COLOR_BUFFER_BIT);
 
+  // renderAllShapes();
+  requestAnimationFrame(tick);
+}
+
+var start_time = performance.now() / 1000.0;
+var seconds = performance.now() / 1000.0 - start_time;
+
+function tick() {
+  seconds = performance.now() / 1000.0 - start_time;
+  // console.log(performance.now());
+
+  setAnnimationAngles();
+
   renderAllShapes();
+
+  requestAnimationFrame(tick);
+}
+
+function setAnnimationAngles() {
+  // console.log(annimation_state);
+  // if (annimation_state == 1) {
+  //   annimation_leg_rotation = Math.sin(seconds) / 7;
+  //   // console.log(annimation_leg_rotation)
+  // }
 }
