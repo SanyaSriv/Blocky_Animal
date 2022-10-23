@@ -126,6 +126,55 @@ function renderAllShapes() {
   battery_bar_3.matrix.scale(0.04, 0.01, 0.01);
   battery_bar_3.render();
 
+  var red_button = new Cylinder();
+  red_button.color = [1, 0, 0, 1.0];
+  red_button.matrix.translate(-0.2, -0.129, -0.53);
+  red_button.matrix.scale(0.04, 0.04, 0.01);
+  red_button.render();
+
+  var body_grill = new Cube();
+  body_grill.color = [94/255, 110/255, 115/255, 1.0];
+  body_grill.matrix.translate(-0.3, -0.095, -0.53);
+  body_grill.matrix.scale(0.12, 0.06, 0.01);
+  body_grill.render();
+
+  var grill_bar_1 = new Cube();
+  grill_bar_1.color = [0.0, 0.0, 0.0, 1.0];
+  grill_bar_1.matrix.translate(-0.28, -0.088, -0.54);
+  grill_bar_1.matrix.scale(0.037, 0.01, 0.001);
+  grill_bar_1.render();
+
+  var grill_bar_2 = new Cube();
+  grill_bar_2.color = [0.0, 0.0, 0.0, 1.0];
+  grill_bar_2.matrix.translate(-0.23, -0.088, -0.54);
+  grill_bar_2.matrix.scale(0.037, 0.01, 0.001);
+  grill_bar_2.render();
+
+  var grill_bar_3 = new Cube();
+  grill_bar_3.color = [0.0, 0.0, 0.0, 1.0];
+  grill_bar_3.matrix.translate(-0.28, -0.074, -0.54);
+  grill_bar_3.matrix.scale(0.037, 0.01, 0.001);
+  grill_bar_3.render();
+
+  var grill_bar_4 = new Cube();
+  grill_bar_4.color = [0.0, 0.0, 0.0, 1.0];
+  grill_bar_4.matrix.translate(-0.23, -0.074, -0.54);
+  grill_bar_4.matrix.scale(0.037, 0.01, 0.001);
+  grill_bar_4.render();
+
+  var grill_bar_5 = new Cube();
+  grill_bar_5.color = [0.0, 0.0, 0.0, 1.0];
+  grill_bar_5.matrix.translate(-0.28, -0.06, -0.54);
+  grill_bar_5.matrix.scale(0.037, 0.01, 0.001);
+  grill_bar_5.render();
+
+  var grill_bar_6 = new Cube();
+  grill_bar_6.color = [0.0, 0.0, 0.0, 1.0];
+  grill_bar_6.matrix.translate(-0.23, -0.06, -0.54);
+  grill_bar_6.matrix.scale(0.037, 0.01, 0.001);
+  grill_bar_6.render();
+
+
   // making text on Wall-E's body - | of W
   // writing W
   var wall_e_letter_scale = 0.8;
