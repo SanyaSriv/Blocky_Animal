@@ -78,7 +78,7 @@ function renderAllShapes() {
   // console.log("Came here, going to draw the body");
 
   // checkig for the leg movement - if it is not the default
-
+  var start_time = performance.now();
   var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
   // then rotate it vertically
   globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
@@ -453,8 +453,18 @@ function renderAllShapes() {
   left_eye_cornea.matrix.scale(0.55, 0.55, 0.002);
   left_eye_cornea.render();
 
+
+  // calculating the performance in the very end;
+  var duration = performance.now() - start_time;
+  sendTextToHTML("fps = " + Math.floor(10000/duration), "fps");
+
 }
 
+function sendTextToHTML(text, htmlID){
+  console.log("text is = ", text);
+  var htmlElm = document.getElementById(htmlID);
+  htmlElm.innerHTML = text;
+}
 // extract the canvas and initialize WebGL
 function setupWebGL() {
   // Retrieve <canvas> element
