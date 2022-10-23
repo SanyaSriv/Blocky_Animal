@@ -398,8 +398,58 @@ function renderAllShapes() {
   neck_2.matrix = neck_1_reference_matrix;
   neck_2.matrix.translate(0, 0.127, 0);
   neck_2.matrix.rotate(45, 1, 0, 0);
+  var neck_2_reference_matrix = new Matrix4(neck_2.matrix);
+  var neck_2_reference_matrix_2 = new Matrix4(neck_2.matrix);
   neck_2.matrix.scale(0.07, 0.128, 0.07);
   neck_2.render();
+
+  // now we need to make Wall E's eyes
+  var right_eye = new Cylinder();
+  right_eye.color = [196/255, 132/255, 66/255, 1.0];
+  right_eye.matrix = neck_2_reference_matrix;
+  right_eye.matrix.translate(-0.025, 0.165, 0.0);
+  right_eye.matrix.scale(0.1, 0.1, 0.16);
+  var right_eye_reference_matrix = new Matrix4(right_eye.matrix);
+  right_eye.render();
+
+  var right_inner_eye = new Cylinder();
+  right_inner_eye.color = [202/255, 223/255, 230/255, 1.0];
+  right_inner_eye.matrix = right_eye_reference_matrix;
+  right_inner_eye.matrix.translate(0.0, 0.0, -0.001);
+  right_inner_eye.matrix.scale(0.8, 0.8, 0.001);
+  var right_inner_eye_reference_matrix = new Matrix4(right_inner_eye.matrix);
+  right_inner_eye.render();
+
+  var right_eye_cornea = new Cylinder();
+  right_eye_cornea.color = [9/255, 24/255, 49/255, 1.0];
+  right_eye_cornea.matrix = right_inner_eye_reference_matrix;
+  right_eye_cornea.matrix.translate(0.07, 0.07, -0.05);
+  right_eye_cornea.matrix.scale(0.55, 0.55, 0.002);
+  right_eye_cornea.render();
+
+  var left_eye = new Cylinder();
+  left_eye.color = [196/255, 132/255, 66/255, 1.0];
+  left_eye.matrix = neck_2_reference_matrix_2;
+  left_eye.matrix.translate(0.09, 0.165, 0.0);
+  left_eye.matrix.scale(0.1, 0.1, 0.16);
+  var left_eye_reference_matrix = new Matrix4(left_eye.matrix);
+  left_eye.render();
+
+  var left_inner_eye = new Cylinder();
+  left_inner_eye.color = [202/255, 223/255, 230/255, 1.0];
+  left_inner_eye.matrix = left_eye_reference_matrix;
+  left_inner_eye.matrix.translate(0.0, 0.0, -0.001);
+  left_inner_eye.matrix.scale(0.8, 0.8, 0.001);
+  var left_inner_eye_reference_matrix = new Matrix4(left_inner_eye.matrix);
+  left_inner_eye.render();
+
+  var left_eye_cornea = new Cylinder();
+  left_eye_cornea.color = [9/255, 24/255, 49/255, 1.0];
+  left_eye_cornea.matrix = left_inner_eye_reference_matrix;
+  left_eye_cornea.matrix.translate(-0.07, 0.07, -0.05);
+  left_eye_cornea.matrix.scale(0.55, 0.55, 0.002);
+  left_eye_cornea.render();
+
 }
 
 // extract the canvas and initialize WebGL

@@ -45,10 +45,13 @@ class Cylinder {
       // console.log(point0_x, point0_y, point1_x, point1_y, point2_x, point2_y);
       // Draw
       // front circle
+      gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
       drawTriangles3D([0.0,0.0,0.0,  point1_x, point1_y, 0.0,   point2_x,point2_y, 0.0]);
       //back circle
+      gl.uniform4f(u_FragColor, rgba[0] * 0.4, rgba[1] * 0.4, rgba[2] * 0.4, rgba[3]);
       drawTriangles3D([0.0,0.0,1.0,  point1_x, point1_y, 1.0,   point2_x,point2_y, 1.0]);
       // connecting these 2 by 2 triangles
+      gl.uniform4f(u_FragColor, rgba[0] * 0.9, rgba[1] * 0.9, rgba[2] * 0.9, rgba[3]);
       drawTriangles3D([point1_x, point1_y, 0.0,  point1_x, point1_y, 1.0,   point2_x,point2_y, 1.0]);
       drawTriangles3D([point2_x,point2_y, 1.0,  point2_x,point2_y, 0.0,  point1_x, point1_y, 0.0,]);
     }
