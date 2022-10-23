@@ -33,6 +33,7 @@ let left_forearm_rotation = 0;
 let left_forearm_scale = 100;
 let hand_open_close_movement = 0;
 let hand_rotation = 0;
+let upper_neck_rotation = 0;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -46,6 +47,7 @@ function AddActionsToHtmlUI() {
   document.getElementById("left_forearm_scale").addEventListener('mousemove', function() {left_forearm_scale = this.value; renderAllShapes();});
   document.getElementById("hands_open_close").addEventListener('mousemove', function() {hand_open_close_movement = this.value; renderAllShapes();});
   document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderAllShapes();});
+  document.getElementById("neck_upper_rotate").addEventListener('mousemove', function() {upper_neck_rotation = this.value; renderAllShapes();});
 
 }
 // function setRotation() {
@@ -509,6 +511,7 @@ function renderAllShapes() {
   neck_2.matrix = neck_1_reference_matrix;
   neck_2.matrix.translate(0, 0.127, 0);
   neck_2.matrix.rotate(45, 1, 0, 0);
+  neck_2.matrix.rotate(upper_neck_rotation, 1, 0, 0);
   var neck_2_reference_matrix = new Matrix4(neck_2.matrix);
   var neck_2_reference_matrix_2 = new Matrix4(neck_2.matrix);
   neck_2.matrix.scale(0.07, 0.128, 0.07);
