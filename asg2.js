@@ -587,6 +587,14 @@ function renderAllShapes() {
   right_eye_cornea.matrix.scale(0.55, 0.55, 0.002);
   right_eye_cornea.render();
 
+  var right_eyebrow = new Cube();
+  right_eyebrow.color = [241/255, 180/255, 129/255, 1.0];
+  right_eyebrow.matrix = right_eye_reference_matrix;
+  right_eyebrow.matrix.translate(-0.7, 0.56, 0.5);
+  right_eyebrow.matrix.rotate(15, 0, 0, 1);
+  right_eyebrow.matrix.scale(1.2, 0.1, 0.1);
+  right_eyebrow.render();
+
   var left_eye = new Cylinder();
   left_eye.color = [127/255, 131/255, 135/255, 1.0];
   left_eye.matrix = neck_2_reference_matrix_2;
@@ -610,6 +618,13 @@ function renderAllShapes() {
   left_eye_cornea.matrix.scale(0.55, 0.55, 0.002);
   left_eye_cornea.render();
 
+  var left_eyebrow = new Cube();
+  left_eyebrow.color = [241/255, 180/255, 129/255, 1.0];
+  left_eyebrow.matrix = left_eye_reference_matrix;
+  left_eyebrow.matrix.translate(-0.60, 0.89, 0.5);
+  left_eyebrow.matrix.rotate(-15, 0, 0, 1);
+  left_eyebrow.matrix.scale(1.2, 0.1, 0.1);
+  left_eyebrow.render();
 
   // calculating the performance in the very end;
   var duration = performance.now() - start_time;
