@@ -32,6 +32,7 @@ let neck_front_back = 0;
 let left_forearm_rotation = 0;
 let left_forearm_scale = 100;
 let hand_open_close_movement = 0;
+let hand_rotation = 0;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -44,6 +45,7 @@ function AddActionsToHtmlUI() {
   document.getElementById("left_forearm").addEventListener('mousemove', function() {left_forearm_rotation = this.value; renderAllShapes();});
   document.getElementById("left_forearm_scale").addEventListener('mousemove', function() {left_forearm_scale = this.value; renderAllShapes();});
   document.getElementById("hands_open_close").addEventListener('mousemove', function() {hand_open_close_movement = this.value; renderAllShapes();});
+  document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderAllShapes();});
 
 }
 // function setRotation() {
@@ -389,6 +391,7 @@ function renderAllShapes() {
   left_forearm_2.color = [83/255, 122/255, 143/255, 1.0];
   left_forearm_2.matrix = left_forearm_1_reference_matrix;
   left_forearm_2.matrix.translate(0.009, 0.009, 0.198);
+  left_forearm_2.matrix.rotate(hand_rotation, 0, 0, 1);
   var left_forearm_2_reference_matrix = new Matrix4(left_forearm_2.matrix);
   var left_forearm_2_reference_matrix_2 = new Matrix4(left_forearm_2.matrix);
   left_forearm_2.matrix.scale(0.03, 0.03, 0.12 * (left_forearm_scale / 100));
@@ -405,6 +408,8 @@ function renderAllShapes() {
   // I suspect this is because we are reusing the left_forearm_2_reference_matrix
   // and it is getting passed by pointers and changing
   left_hand_1.matrix.rotate(hand_open_close_movement, 0, 1, 0);
+  // adding user controlled hand rotation here
+  // left_hand_1.matrix.rotate(hand_rotation, 0, 0, 1);
   left_hand_1.matrix.scale(0.01, 0.05, 0.11);
   left_hand_1.render();
 
@@ -420,6 +425,7 @@ function renderAllShapes() {
   left_hand_3.matrix.translate(0.01, -0.01, 0.12 * (left_forearm_scale / 100));
   left_hand_3.matrix.rotate(45, 0, 1, 0);
   left_hand_3.matrix.rotate(-hand_open_close_movement, 0, 1, 0);
+  // left_hand_3.matrix.rotate(-hand_rotation, 1, 0, 0);
   left_hand_3.matrix.scale(0.01, 0.05, 0.11);
   left_hand_3.render()
 
@@ -452,6 +458,7 @@ function renderAllShapes() {
   right_forearm_2.color = [83/255, 122/255, 143/255, 1.0];
   right_forearm_2.matrix = right_forearm_1_reference_matrix;
   right_forearm_2.matrix.translate(0.009, 0.009, 0.198);
+  right_forearm_2.matrix.rotate(-hand_rotation, 0, 0, 1);
   var right_forearm_2_reference_matrix = new Matrix4(right_forearm_2.matrix);
   var right_forearm_2_reference_matrix_2 = new Matrix4(right_forearm_2.matrix);
   // using the left one just to check: this can later have its own parameter "right_forearm_scale"

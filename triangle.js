@@ -70,5 +70,13 @@ function drawTriangles3D(vertices) {
 
   // Draw
   gl.drawArrays(gl.TRIANGLES, 0, n);
+
+  // gl.drawArrays(gl.TRIANGLES, 0, vertices.length / 3)
+  // gl.enableVertexAttribArray(gl.COLOR_ARRAY);
+  // // trying something here to improve performance
+  // if (color != null) {
+  //   gl.glColorPointer(3, gl.FLOAT, 0, color);
+  // }
+
   return n;
 }
