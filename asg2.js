@@ -107,25 +107,25 @@ function renderAllShapes() {
   var wall_e_letter_scale = 0.8;
   var wall_e_z_axis_offset
   var w_1 = new Cube();
-  w_1.color = [1,0,0, 1.0];
+  w_1.color = [0,0,0, 1.0];
   w_1.matrix.setTranslate(-0.36, -0.45, -0.51);
   w_1.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   w_1.render();
 
   var w_2 = new Cube();
-  w_2.color = [1,0,0, 1.0];
+  w_2.color = [0,0,0, 1.0];
   w_2.matrix.setTranslate(-0.34, -0.45, -0.51);
   w_2.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   w_2.render();
 
   var w_3 = new Cube();
-  w_3.color = [1,0,0, 1.0];
+  w_3.color = [0,0,0, 1.0];
   w_3.matrix.setTranslate(-0.32, -0.45, -0.51);
   w_3.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   w_3.render();
 
   var w_4 = new Cube();
-  w_4.color = [1,0,0, 1.0];
+  w_4.color = [0,0,0, 1.0];
   w_4.matrix.setTranslate(-0.32, -0.45, -0.51);
   w_4.matrix.rotate(90, 0, 0, 1);
   w_4.matrix.scale(0.010 * wall_e_letter_scale, 0.04 * wall_e_letter_scale, 0.01);
@@ -134,21 +134,21 @@ function renderAllShapes() {
   // writing A in WALL-E
   // first vertical line for A
   var a_1 = new Cube();
-  a_1.color = [1,0,0, 1.0];
+  a_1.color = [0,0,0, 1.0];
   a_1.matrix.setTranslate(-0.29, -0.45, -0.51);
   a_1.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   a_1.render();
 
   // second vertical line for A
   var a_2 = new Cube();
-  a_2.color = [1,0,0, 1.0];
+  a_2.color = [0,0,0, 1.0];
   a_2.matrix.setTranslate(-0.25, -0.45, -0.51);
   a_2.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   a_2.render();
 
   // upper top horizontal line for A
   var a_3 = new Cube();
-  a_3.color = [1,0,0, 1.0];
+  a_3.color = [0,0,0, 1.0];
   a_3.matrix.setTranslate(-0.247, -0.42, -0.51);
   a_3.matrix.rotate(90, 0, 0, 1);
   a_3.matrix.scale(0.010 * wall_e_letter_scale, 0.045 * wall_e_letter_scale, 0.01);
@@ -156,7 +156,7 @@ function renderAllShapes() {
 
   // middle bar for A
   var a_4 = new Cube();
-  a_4.color = [1,0,0, 1.0];
+  a_4.color = [0,0,0, 1.0];
   a_4.matrix.setTranslate(-0.247, -0.44, -0.51);
   a_4.matrix.rotate(90, 0, 0, 1);
   a_4.matrix.scale(0.010 * wall_e_letter_scale, 0.045 * wall_e_letter_scale, 0.01);
@@ -165,13 +165,13 @@ function renderAllShapes() {
 
   // now going to make the first L
   var l1_1 = new Cube();
-  l1_1.color = [1,0,0, 1.0];
+  l1_1.color = [0,0,0, 1.0];
   l1_1.matrix.setTranslate(-0.22, -0.45, -0.51);
   l1_1.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   l1_1.render();
 
   var l1_2 = new Cube();
-  l1_2.color = [1,0,0, 1.0];
+  l1_2.color = [0,0,0, 1.0];
   l1_2.matrix.setTranslate(-0.175, -0.45, -0.51);
   l1_2.matrix.rotate(90, 0, 0, 1);
   l1_2.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
@@ -180,13 +180,13 @@ function renderAllShapes() {
 
   // now going to make the second L
   var l2_1 = new Cube();
-  l2_1.color = [1,0,0, 1.0];
+  l2_1.color = [0,0,0, 1.0];
   l2_1.matrix.setTranslate(-0.16, -0.45, -0.51);
   l2_1.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   l2_1.render();
 
   var l2_2 = new Cube();
-  l2_2.color = [1,0,0, 1.0];
+  l2_2.color = [0,0,0, 1.0];
   l2_2.matrix.setTranslate(-0.115, -0.45, -0.51);
   l2_2.matrix.rotate(90, 0, 0, 1);
   l2_2.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
@@ -194,38 +194,41 @@ function renderAllShapes() {
 
   // making the dot
   var dot = new Cube();
-  dot.color = [1,0,0, 1.0];
+  dot.color = [0,0,0, 1.0];
   dot.matrix.setTranslate(-0.09, -0.44, -0.51);
   dot.matrix.rotate(90, 0, 0, 1);
   dot.matrix.scale(0.02 * wall_e_letter_scale, 0.02 * wall_e_letter_scale, 0.01);
   dot.render();
 
-
+  var e_circle = new Cylinder();
+  e_circle.matrix.setTranslate(-0.043, -0.43, -0.51);
+  e_circle.matrix.scale(0.09 * wall_e_letter_scale, 0.09 * wall_e_letter_scale, 0.01);
+  e_circle.render();
   // now making the E of Wall E
   var e_1 = new Cube();
-  e_1.color = [1,0,0, 1.0];
-  e_1.matrix.setTranslate(-0.03, -0.45, -0.51);
+  e_1.color = [1,1,1, 1.0];
+  e_1.matrix.setTranslate(-0.0225, -0.45, -0.5102);
   e_1.matrix.rotate(90, 0, 0, 1);
   e_1.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   e_1.render();
 
   var e_2 = new Cube();
-  e_2.color = [1,0,0, 1.0];
-  e_2.matrix.setTranslate(-0.03, -0.435, -0.51);
+  e_2.color = [1,1,1, 1.0];
+  e_2.matrix.setTranslate(-0.025, -0.435, -0.5102);
   e_2.matrix.rotate(90, 0, 0, 1);
   e_2.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   e_2.render();
 
   var e_3 = new Cube();
-  e_3.color = [1,0,0, 1.0];
-  e_3.matrix.setTranslate(-0.03, -0.42, -0.51);
+  e_3.color = [1,1,1, 1.0];
+  e_3.matrix.setTranslate(-0.025, -0.42, -0.5102);
   e_3.matrix.rotate(90, 0, 0, 1);
   e_3.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   e_3.render();
 
   var e_4 = new Cube();
-  e_4.color = [1,0,0, 1.0];
-  e_4.matrix.setTranslate(-0.07, -0.45, -0.51);
+  e_4.color = [1,1,1, 1.0];
+  e_4.matrix.setTranslate(-0.065, -0.45, -0.5102);
   e_4.matrix.scale(0.010 * wall_e_letter_scale, 0.05 * wall_e_letter_scale, 0.01);
   e_4.render();
 
@@ -394,7 +397,7 @@ function renderAllShapes() {
   neck_1.render();
 
   var neck_2 = new Cube();
-  neck_2.color = [149/255, 102/255, 72/255, 1.0];
+  neck_2.color = [171/255, 113/255, 74/255, 1.0];
   neck_2.matrix = neck_1_reference_matrix;
   neck_2.matrix.translate(0, 0.127, 0);
   neck_2.matrix.rotate(45, 1, 0, 0);
@@ -405,7 +408,7 @@ function renderAllShapes() {
 
   // now we need to make Wall E's eyes
   var right_eye = new Cylinder();
-  right_eye.color = [196/255, 132/255, 66/255, 1.0];
+  right_eye.color = [127/255, 131/255, 135/255, 1.0];
   right_eye.matrix = neck_2_reference_matrix;
   right_eye.matrix.translate(-0.025, 0.165, 0.0);
   right_eye.matrix.scale(0.1, 0.1, 0.16);
@@ -413,7 +416,7 @@ function renderAllShapes() {
   right_eye.render();
 
   var right_inner_eye = new Cylinder();
-  right_inner_eye.color = [202/255, 223/255, 230/255, 1.0];
+  right_inner_eye.color = [193/255, 194/255, 188/255, 1.0];
   right_inner_eye.matrix = right_eye_reference_matrix;
   right_inner_eye.matrix.translate(0.0, 0.0, -0.001);
   right_inner_eye.matrix.scale(0.8, 0.8, 0.001);
@@ -428,7 +431,7 @@ function renderAllShapes() {
   right_eye_cornea.render();
 
   var left_eye = new Cylinder();
-  left_eye.color = [196/255, 132/255, 66/255, 1.0];
+  left_eye.color = [127/255, 131/255, 135/255, 1.0];
   left_eye.matrix = neck_2_reference_matrix_2;
   left_eye.matrix.translate(0.09, 0.165, 0.0);
   left_eye.matrix.scale(0.1, 0.1, 0.16);
@@ -436,7 +439,7 @@ function renderAllShapes() {
   left_eye.render();
 
   var left_inner_eye = new Cylinder();
-  left_inner_eye.color = [202/255, 223/255, 230/255, 1.0];
+  left_inner_eye.color = [193/255, 194/255, 188/255, 1.0];
   left_inner_eye.matrix = left_eye_reference_matrix;
   left_inner_eye.matrix.translate(0.0, 0.0, -0.001);
   left_inner_eye.matrix.scale(0.8, 0.8, 0.001);
