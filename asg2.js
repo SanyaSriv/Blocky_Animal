@@ -49,17 +49,17 @@ let animation_leg_rotation = 0;
 // this is slowing down the program
 function AddActionsToHtmlUI() {
   // listener for camera angle
-  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; renderAllShapes();});
-  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; renderAllShapes();});
+  document.getElementById("camera_angle").addEventListener('mousemove', function() {g_globalAngle = this.value; renderScene();});
+  document.getElementById("camera_angle2").addEventListener('mousemove', function() {g_globalAngleVertical = this.value; renderScene();});
   document.getElementById("wall_e_leg_vertical").addEventListener('mousemove', function() {leg_vertical_movement = this.value; scaleVerticalLegMovement();});
   document.getElementById("arm_vertical").addEventListener('mousemove', function() {arm_vertical_movement = this.value; scaleVerticalArmMovement();});
-  document.getElementById("neck_front_back").addEventListener('mousemove', function() {neck_front_back = this.value; renderAllShapes();});
-  document.getElementById("left_forearm").addEventListener('mousemove', function() {left_forearm_rotation = this.value; renderAllShapes();});
-  document.getElementById("left_forearm_scale").addEventListener('mousemove', function() {left_forearm_scale = this.value; renderAllShapes();});
-  document.getElementById("hands_open_close").addEventListener('mousemove', function() {hand_open_close_movement = this.value; renderAllShapes();});
-  document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderAllShapes();});
-  document.getElementById("neck_upper_rotate").addEventListener('mousemove', function() {upper_neck_rotation = this.value; renderAllShapes();});
-  document.getElementById("global_scale").addEventListener('mousemove', function() {global_scale = this.value; renderAllShapes();});
+  document.getElementById("neck_front_back").addEventListener('mousemove', function() {neck_front_back = this.value; renderScene();});
+  document.getElementById("left_forearm").addEventListener('mousemove', function() {left_forearm_rotation = this.value; renderScene();});
+  document.getElementById("left_forearm_scale").addEventListener('mousemove', function() {left_forearm_scale = this.value; renderScene();});
+  document.getElementById("hands_open_close").addEventListener('mousemove', function() {hand_open_close_movement = this.value; renderScene();});
+  document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderScene();});
+  document.getElementById("neck_upper_rotate").addEventListener('mousemove', function() {upper_neck_rotation = this.value; renderScene();});
+  document.getElementById("global_scale").addEventListener('mousemove', function() {global_scale = this.value; renderScene();});
   document.getElementById("hello_animation_on").addEventListener('mousedown', function() {hello_animation_state = 1; ticker = 0;});
   document.getElementById("hello_animation_off").addEventListener('mousedown', function() {hello_animation_state = 0; ticker = 0;});
   // trying to add the shift ket animation
@@ -73,16 +73,16 @@ function scaleVerticalLegMovement() {
   if (leg_vertical_movement > 0.09) {
     leg_vertical_movement = 0.09;
   }
-  renderAllShapes();
+  renderScene();
 }
 //
 function scaleVerticalArmMovement() {
-  renderAllShapes();
+  renderScene();
 }
 
 // Function to render all shapes stored in g_points_array
 // we need a way to store how and when exactly was the butterfly drawn
-function renderAllShapes() {
+function renderScene() {
   // Clear the canvas
   // console.log("Came here, going to draw the body: ", shift_animation_rotation);
   // checkig for the leg movement - if it is not the default
@@ -757,7 +757,7 @@ function main() {
   // Clear the canvas
   // gl.clear(gl.COLOR_BUFFER_BIT);
 
-  // renderAllShapes();
+  // renderScene();
   requestAnimationFrame(tick);
 }
 
@@ -771,7 +771,7 @@ function tick() {
 
   setAnnimationAngles();
 
-  renderAllShapes();
+  renderScene();
 
   requestAnimationFrame(tick);
 }
