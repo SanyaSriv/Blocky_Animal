@@ -58,6 +58,12 @@ function AddActionsToHtmlUI() {
   document.getElementById("global_scale").addEventListener('mousemove', function() {global_scale = this.value; renderAllShapes();});
   document.getElementById("hello_animation_on").addEventListener('mousedown', function() {hello_animation_state = 1; ticker = 0;});
   document.getElementById("hello_animation_off").addEventListener('mousedown', function() {hello_animation_state = 0; ticker = 0;});
+  // trying to add the shift ket animation
+  document.addEventListener('mousedown', function (ev) {
+    if (ev.shiftKey) {
+      console.log("shift is trye");
+    }
+  });
 
 }
 
