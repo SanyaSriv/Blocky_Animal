@@ -39,6 +39,8 @@ let upper_neck_rotation = 0;
 let global_scale = 100;
 let special_shift_animation = 0;
 let mouse_rotate_x = 0;
+let mouse_rotate_y = 0;
+let mouse_rotate_z = 0;
 
 // global animation variables
 let hello_animation_state = 0;
@@ -85,9 +87,17 @@ function renderAllShapes() {
   // console.log("Came here, going to draw the body: ", shift_animation_rotation);
   // checkig for the leg movement - if it is not the default
   var start_time = performance.now();
-  var globalRotate = new Matrix4().rotate(g_globalAngle + shift_animation_rotation + mouse_rotate_x, 0, 1, 0);
+  var combined_x_rotation = parseFloat(g_globalAngle) + parseFloat(shift_animation_rotation) + parseFloat(mouse_rotate_x);
+  var combined_y_rotation = parseFloat(g_globalAngleVertical) + parseFloat(mouse_rotate_y);
+
+  // console.log("x axis rotation: ", g_globalAngle, shift_animation_rotation, mouse_rotate_x);
+  // console.log("y axis rotation: ", combined_y_rotation, g_globalAngleVertical, mouse_rotate_y/10);
+  // var globalRotate = new Matrix4().rotate(g_globalAngle + shift_animation_rotation + mouse_rotate_x, 0, 1, 0);
+  var globalRotate = new Matrix4().rotate(combined_x_rotation, 0, 1, 0);
+
   // then rotate it vertically
-  globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
+  // globalRotate.rotate(g_globalAngleVertical + mouse_rotate_y, 1, 0, 0);
+  globalRotate.rotate(combined_y_rotation, 1, 0, 0);
 
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
 
@@ -730,6 +740,13 @@ function main() {
         mouse_rotate_x = - (final_x - initial_x);
       } else {
         mouse_rotate_x = initial_x - final_x;
+      }
+
+      // now we will rotate along the y axis
+      if (final_y - initial_y > 0) {
+        mouse_rotate_y = - (final_y - initial_y);
+      } else {
+        mouse_rotate_y = initial_y - final_y;
       }
     }
   }
