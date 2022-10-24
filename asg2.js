@@ -38,9 +38,9 @@ let hand_rotation = 0;
 let upper_neck_rotation = 0;
 let global_scale = 100;
 
-// global annimation variables
-let hello_annimation_state = 0;
-let annimation_leg_rotation = 0;
+// global animation variables
+let hello_animation_state = 0;
+let animation_leg_rotation = 0;
 // // this will listen to all sliders
 // this is slowing down the program
 function AddActionsToHtmlUI() {
@@ -56,8 +56,8 @@ function AddActionsToHtmlUI() {
   document.getElementById("hands_rotate").addEventListener('mousemove', function() {hand_rotation = this.value; renderAllShapes();});
   document.getElementById("neck_upper_rotate").addEventListener('mousemove', function() {upper_neck_rotation = this.value; renderAllShapes();});
   document.getElementById("global_scale").addEventListener('mousemove', function() {global_scale = this.value; renderAllShapes();});
-  document.getElementById("hello_annimation_on").addEventListener('mousedown', function() {hello_annimation_state = 1; ticker = 0;});
-  document.getElementById("hello_annimation_off").addEventListener('mousedown', function() {hello_annimation_state = 0; ticker = 0;});
+  document.getElementById("hello_animation_on").addEventListener('mousedown', function() {hello_animation_state = 1; ticker = 0;});
+  document.getElementById("hello_animation_off").addEventListener('mousedown', function() {hello_animation_state = 0; ticker = 0;});
 
 }
 
@@ -337,7 +337,7 @@ function renderAllShapes() {
   // right leg
   var leg_r = new Triangle3D();
   leg_r.color = [111/255, 115/255, 117/255, 1.0];
-  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement + annimation_leg_rotation, 0.1);
+  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement + animation_leg_rotation, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
   leg_r_reference_matrix = new Matrix4(leg_r.matrix);
@@ -374,8 +374,8 @@ function renderAllShapes() {
   left_arm.matrix.setTranslate(-0.04, -0.21, -0.2);
   left_arm.matrix.rotate(90, 0, 1, 0);
   left_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
-  // trying annimation here
-  left_arm.matrix.rotate(-annimation_arm_movement, 1, 0, 0);
+  // trying animation here
+  left_arm.matrix.rotate(-animation_arm_movement, 1, 0, 0);
   // left_arm.matrix.rotate(arm_horizontal_movement, 0, 1, 0);
   var left_arm_reference_matrix = new Matrix4(left_arm.matrix);
   left_arm.matrix.scale(0.06, 0.05, 0.12);
@@ -391,8 +391,8 @@ function renderAllShapes() {
   left_forearm_1.matrix.rotate(-25, 0, 1, 0);
   // rotation based upon the slider
   left_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
-  // trying annimation here
-  left_forearm_1.matrix.rotate(annimation_forearm_movement, 0, 1, 0);
+  // trying animation here
+  left_forearm_1.matrix.rotate(animation_forearm_movement, 0, 1, 0);
   var left_forearm_1_reference_matrix = new Matrix4(left_forearm_1.matrix);
   left_forearm_1.matrix.scale(0.06, 0.05, 0.20);
   left_forearm_1.render();
@@ -511,8 +511,8 @@ function renderAllShapes() {
   neck_1.matrix.setTranslate(-0.27, -0.05, -0.2);
   neck_1.matrix.rotate(-25, 1, 0, 0);
   neck_1.matrix.rotate(neck_front_back, 1, 0, 0);
-  // annimation here
-  neck_1.matrix.rotate(annimation_neck_lower, 1, 0, 0);
+  // animation here
+  neck_1.matrix.rotate(animation_neck_lower, 1, 0, 0);
   var neck_1_reference_matrix = new Matrix4(neck_1.matrix);
   neck_1.matrix.scale(0.07, 0.128, 0.07);
   neck_1.render();
@@ -523,8 +523,8 @@ function renderAllShapes() {
   neck_2.matrix.translate(0, 0.127, 0);
   neck_2.matrix.rotate(45, 1, 0, 0);
   neck_2.matrix.rotate(upper_neck_rotation, 1, 0, 0);
-  // annimation here
-  neck_2.matrix.rotate(-annimation_neck_upper, 1, 0, 0);
+  // animation here
+  neck_2.matrix.rotate(-animation_neck_upper, 1, 0, 0);
   var neck_2_reference_matrix = new Matrix4(neck_2.matrix);
   var neck_2_reference_matrix_2 = new Matrix4(neck_2.matrix);
   neck_2.matrix.scale(0.07, 0.128, 0.07);
@@ -606,7 +606,7 @@ function renderAllShapes() {
   var right_eyebrow = new Cube();
   right_eyebrow.color = [241/255, 180/255, 129/255, 1.0];
   right_eyebrow.matrix = right_eye_reference_matrix;
-  right_eyebrow.matrix.translate(-0.7, 0.56 + annimation_eyebrow, 0.5); // annimation here
+  right_eyebrow.matrix.translate(-0.7, 0.56 + animation_eyebrow, 0.5); // animation here
   right_eyebrow.matrix.rotate(15, 0, 0, 1);
   right_eyebrow.matrix.scale(1.2, 0.1, 0.1);
   right_eyebrow.render();
@@ -637,7 +637,7 @@ function renderAllShapes() {
   var left_eyebrow = new Cube();
   left_eyebrow.color = [241/255, 180/255, 129/255, 1.0];
   left_eyebrow.matrix = left_eye_reference_matrix;
-  left_eyebrow.matrix.translate(-0.60, 0.89 + annimation_eyebrow, 0.5); // annimation here
+  left_eyebrow.matrix.translate(-0.60, 0.89 + animation_eyebrow, 0.5); // animation here
   left_eyebrow.matrix.rotate(-15, 0, 0, 1);
   left_eyebrow.matrix.scale(1.2, 0.1, 0.1);
   left_eyebrow.render();
@@ -760,46 +760,46 @@ function tick() {
 }
 
 // TODO: shift these variables to the top
-var annimation_arm_movement = 0;
-var annimation_forearm_movement = 0;
-var annimation_fingers_movement = 0;
-var annimation_neck_lower = 0;
-var annimation_neck_upper = 0;
-var annimation_eyebrow = 0;
+var animation_arm_movement = 0;
+var animation_forearm_movement = 0;
+var animation_fingers_movement = 0;
+var animation_neck_lower = 0;
+var animation_neck_upper = 0;
+var animation_eyebrow = 0;
 
 function setAnnimationAngles() {
-  // trying to say a hello in the annimation
-  if (hello_annimation_state == 1) {
+  // trying to say a hello in the animation
+  if (hello_animation_state == 1) {
     // then wall-e should bend its eyes down
     if (ticker < 30) {
-      annimation_neck_lower -= 1; // move lower neck down
+      animation_neck_lower -= 1; // move lower neck down
     }
     if ((30 < ticker) && (ticker < 60)) {
-      annimation_neck_upper += 1; // move lower neck up
+      animation_neck_upper += 1; // move lower neck up
     } if ((60 < ticker) && (ticker < 80)) {
-      annimation_neck_upper -= 2;
+      animation_neck_upper -= 2;
     } if ((80 < ticker) && (ticker < 100)) {
       // now move your eyebrows to represent that wall-e's happy
-      annimation_eyebrow -= 0.005;
+      animation_eyebrow -= 0.005;
     } if ((100 < ticker) && (ticker < 120)) {
       // now move your eyebrows to represent that wall-e noticed the user
-      annimation_eyebrow += 0.005;
+      animation_eyebrow += 0.005;
     } if ((120 < ticker) && (ticker < 400)) {
-      annimation_arm_movement = 100 * Math.sin(seconds) / 5;
+      animation_arm_movement = 100 * Math.sin(seconds) / 5;
     } if ((170 < ticker) && (ticker < 200)) {
-        annimation_neck_lower += 1; // move lower neck up
+        animation_neck_lower += 1; // move lower neck up
     }if (ticker > 400) {
-      // at this point 1 set of annimation is complete, and we can loop over this again
+      // at this point 1 set of animation is complete, and we can loop over this again
       // reset
       ticker = 0;
-      annimation_neck_lower = 0;
-      annimation_neck_upper = 0;
-      annimation_eyebrow = 0;
+      animation_neck_lower = 0;
+      animation_neck_upper = 0;
+      animation_eyebrow = 0;
     }
   } else {
-    annimation_arm_movement = 0;
-    annimation_neck_lower = 0;
-    annimation_neck_upper = 0;
-    annimation_eyebrow = 0;
+    animation_arm_movement = 0;
+    animation_neck_lower = 0;
+    animation_neck_upper = 0;
+    animation_eyebrow = 0;
   }
 }
