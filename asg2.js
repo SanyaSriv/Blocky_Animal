@@ -72,10 +72,9 @@ function scaleVerticalLegMovement() {
 }
 //
 function scaleVerticalArmMovement() {
-  // arm_vertical_movement -= 50;
-  // arm_vertical_movement /= 300;
   renderAllShapes();
 }
+
 // Function to render all shapes stored in g_points_array
 // we need a way to store how and when exactly was the butterfly drawn
 function renderAllShapes() {
@@ -529,56 +528,6 @@ function renderAllShapes() {
   var neck_2_reference_matrix_2 = new Matrix4(neck_2.matrix);
   neck_2.matrix.scale(0.07, 0.128, 0.07);
   neck_2.render();
-
-  // now we need to make Wall E's eyes
-  // var right_eye = new Cylinder();
-  // right_eye.color = [127/255, 131/255, 135/255, 1.0];
-  // right_eye.matrix = neck_2_reference_matrix;
-  // right_eye.matrix.translate(-0.025, 0.165, 0.0);
-  // var right_eye_reference_matrix_2 = new Matrix4(right_eye.matrix);
-  // right_eye.matrix.scale(0.1, 0.1, 0.16);
-  // var right_eye_reference_matrix = new Matrix4(right_eye.matrix);
-  // right_eye.render();
-
-  // var right_eye = new Cylinder();
-  // right_eye.color = [127/255, 131/255, 135/255, 1.0];
-  // right_eye.matrix = neck_2_reference_matrix;
-  // right_eye.matrix.translate(-0.090, 0.165, 0.0);
-  // var right_eye_reference_matrix_2 = new Matrix4(right_eye.matrix);
-  // right_eye.matrix.scale(0.12, 0.12, 0.16);
-  // var right_eye_reference_matrix = new Matrix4(right_eye.matrix);
-  // right_eye.render();
-  //
-  // var eye_part = new Triangle3D();
-  // eye_part.color = [127/255, 131/255, 135/255, 1.0];
-  // eye_part.matrix = right_eye_reference_matrix_2;
-  // eye_part.matrix.translate(0.054, -0.0319, 0.00);
-  // eye_part.matrix.rotate(75, 0, 0, 1);
-  // eye_part.matrix.scale(0.077, 0.077, 0.16);
-  // var reff = new Matrix4(eye_part.matrix);
-  // eye_part.render();
-  //
-  // var right_inner_eye = new Cylinder();
-  // right_inner_eye.color = [193/255, 194/255, 188/255, 1.0];
-  // right_inner_eye.matrix = right_eye_reference_matrix;
-  // right_inner_eye.matrix.translate(0.0, 0.0, -0.015);
-  // right_inner_eye.matrix.scale(0.8, 0.8, 0.001);
-  // var right_inner_eye_reference_matrix = new Matrix4(right_inner_eye.matrix);
-  // right_inner_eye.render();
-
-  // var right_inner_eye_2 = new Triangle3D();
-  // right_inner_eye_2.color = [193/255, 194/255, 188/255, 1.0];
-  // right_inner_eye_2.matrix = reff;
-  // right_inner_eye_2.matrix.translate(0.15, 0.1, -0.016);
-  // right_inner_eye_2.matrix.scale(0.69, 0.69, 0.001);
-  // right_inner_eye_2.render();
-  //
-  // var right_eye_cornea = new Cylinder();
-  // right_eye_cornea.color = [9/255, 24/255, 49/255, 1.0];
-  // right_eye_cornea.matrix = right_inner_eye_reference_matrix;
-  // right_eye_cornea.matrix.translate(0.12, 0.09, -0.7);
-  // right_eye_cornea.matrix.scale(0.55, 0.55, 0.04);
-  // right_eye_cornea.render();
 
   var right_eye = new Cylinder();
   right_eye.color = [127/255, 131/255, 135/255, 1.0];
