@@ -81,7 +81,7 @@ function scaleVerticalArmMovement() {
 // we need a way to store how and when exactly was the butterfly drawn
 function renderAllShapes() {
   // Clear the canvas
-  console.log("Came here, going to draw the body: ", shift_animation_rotation);
+  // console.log("Came here, going to draw the body: ", shift_animation_rotation);
   // checkig for the leg movement - if it is not the default
   var start_time = performance.now();
   var globalRotate = new Matrix4().rotate(g_globalAngle + shift_animation_rotation, 0, 1, 0);
@@ -685,15 +685,41 @@ function click(ev) {
 
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
-  console.log(x, y);
+  // console.log(x, y);
 }
+
+// drag functionality
+var mouse_down = 0;
+var mouse_up = 0;
+var drag = 0;
+var initial_x = 0;
+var initial_y = 0;
+
 function main() {
   // Setting up WebGL
   setupWebGL();
   connectVariablesToGLSL();
   // Initialize shaders
   AddActionsToHtmlUI();
-  canvas.onmousedown = function(ev){ click(ev) };
+  canvas.onmousedown = function(ev) {
+    mouse_down = 1;
+    mouse_up = 0;
+    initial_x = ev.clientX;
+    initial_y = ev.clientY;
+  };
+  canvas.onmouseup = function(ev) {
+    mouse_up = 1;
+    mouse_down = 0;
+    final_x = ev.clientX;
+    final_y = ev.clientY;
+
+    if ((final_x != initial_x) && (final_y != initial_y)) {
+      drag = 1;
+    } else {
+      drag = 0;
+    }
+    console.log("drag = ", drag);
+  }
   canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -839,7 +865,7 @@ function setAnnimationAngles() {
   }
   if (special_shift_animation == true) {
     // in this animation, we can rotate WallE quickly and then let it do a quick thing
-    console.log(special_shift_animation)
+    // console.log(special_shift_animation)
     if ((0 < ticker) && (ticker < 60)) {
       shift_animation_rotation += 3;
       shift_animation_hands_up += 1;
