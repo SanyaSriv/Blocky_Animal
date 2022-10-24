@@ -38,6 +38,7 @@ let hand_rotation = 0;
 let upper_neck_rotation = 0;
 let global_scale = 100;
 let special_shift_animation = 0;
+let mouse_rotate_x = 0;
 
 // global animation variables
 let hello_animation_state = 0;
@@ -84,7 +85,7 @@ function renderAllShapes() {
   // console.log("Came here, going to draw the body: ", shift_animation_rotation);
   // checkig for the leg movement - if it is not the default
   var start_time = performance.now();
-  var globalRotate = new Matrix4().rotate(g_globalAngle + shift_animation_rotation, 0, 1, 0);
+  var globalRotate = new Matrix4().rotate(g_globalAngle + shift_animation_rotation + mouse_rotate_x, 0, 1, 0);
   // then rotate it vertically
   globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
 
@@ -707,7 +708,9 @@ function main() {
     initial_x = ev.clientX;
     initial_y = ev.clientY;
   };
-  canvas.onmouseup = function(ev) {
+  // canvas.onmouseup = function(ev) {
+  canvas.onmousemove = function(ev){
+  if (ev.buttons == 1) {
     mouse_up = 1;
     mouse_down = 0;
     final_x = ev.clientX;
@@ -718,9 +721,20 @@ function main() {
     } else {
       drag = 0;
     }
-    console.log("drag = ", drag);
+
+    // if the user dragged on canvas, then we rotate
+    if (drag == 1) {
+      // rotate along the x axis
+      if (final_x - initial_x > 0) {
+        // then it means the user went from right to left
+        mouse_rotate_x = - (final_x - initial_x);
+      } else {
+        mouse_rotate_x = initial_x - final_x;
+      }
+    }
   }
-  canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
+  }
+  // canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear the canvas
