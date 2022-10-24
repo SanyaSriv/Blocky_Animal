@@ -1,3 +1,5 @@
+// NOTE: I did not use this anywhere in Wall-E
+
 class Sphere {
   constructor() {
     this.color = [1.0, 0.0, 0.0, 1.0];

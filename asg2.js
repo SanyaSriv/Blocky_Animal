@@ -888,6 +888,8 @@ function setAnnimationAngles() {
       // annimation_zoom = 1;
     }
   } else {
+    annimation_raise_hand = 0;
+    annimation_open_hand = 0;
     animation_arm_movement = 0;
     animation_neck_lower = 0;
     animation_neck_upper = 0;
@@ -909,12 +911,13 @@ function setAnnimationAngles() {
       shift_animation_neck -= 1;
       shift_forearm_rotation -= 0.5;
       shift_leg_rotation -= 0.0009;
-    } else if (ticker > 120) {
-      special_shift_animation = 0;
+    } else if (ticker > 120) { // end this animation
+      special_shift_animation = false;
       shift_animation_neck = 0;
       shift_animation_hands_up = 0;
       shift_animation_rotation = 0;
       shift_forearm_rotation = 0;
+      shift_leg_rotation = 0;
     }
   }
 }
