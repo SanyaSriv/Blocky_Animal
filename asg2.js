@@ -37,6 +37,7 @@ let hand_open_close_movement = 0;
 let hand_rotation = 0;
 let upper_neck_rotation = 0;
 let global_scale = 100;
+let special_shift_animation = 0;
 
 // global animation variables
 let hello_animation_state = 0;
@@ -59,12 +60,7 @@ function AddActionsToHtmlUI() {
   document.getElementById("hello_animation_on").addEventListener('mousedown', function() {hello_animation_state = 1; ticker = 0;});
   document.getElementById("hello_animation_off").addEventListener('mousedown', function() {hello_animation_state = 0; ticker = 0;});
   // trying to add the shift ket animation
-  document.addEventListener('mousedown', function (ev) {
-    if (ev.shiftKey) {
-      console.log("shift is trye");
-    }
-  });
-
+  document.addEventListener('mousedown', function (ev) {special_shift_animation = ev.shiftKey; ticker = 0;});
 }
 
 function scaleVerticalLegMovement() {
@@ -85,11 +81,10 @@ function scaleVerticalArmMovement() {
 // we need a way to store how and when exactly was the butterfly drawn
 function renderAllShapes() {
   // Clear the canvas
-  // console.log("Came here, going to draw the body");
-
+  console.log("Came here, going to draw the body: ", shift_animation_rotation);
   // checkig for the leg movement - if it is not the default
   var start_time = performance.now();
-  var globalRotate = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+  var globalRotate = new Matrix4().rotate(g_globalAngle + shift_animation_rotation, 0, 1, 0);
   // then rotate it vertically
   globalRotate.rotate(g_globalAngleVertical, 1, 0, 0);
 
@@ -342,7 +337,7 @@ function renderAllShapes() {
   // right leg
   var leg_r = new Triangle3D();
   leg_r.color = [111/255, 115/255, 117/255, 1.0];
-  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement + animation_leg_rotation, 0.1);
+  leg_r.matrix.setTranslate(0.2, -0.65 + leg_vertical_movement + animation_leg_rotation + shift_leg_rotation, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_r.matrix.rotate(98, 0, 0, 1); // decides if it is inward or outward
   leg_r_reference_matrix = new Matrix4(leg_r.matrix);
@@ -362,7 +357,7 @@ function renderAllShapes() {
   // left leg
   var leg_l = new Triangle3D();
   leg_l.color = [111/255, 115/255, 117/255, 1.0];
-  leg_l.matrix.setTranslate(-0.50, -0.66 + leg_vertical_movement, 0.1);
+  leg_l.matrix.setTranslate(-0.50, -0.66 + leg_vertical_movement + shift_leg_rotation, 0.1);
   // body.matrix.rotate(90, 1, 0, 0);
   leg_l.matrix.rotate(91, 0, 0, 1); // decides if it is inward or outward
   leg_l.matrix.rotate(45, 0, 1, 0);
@@ -381,6 +376,8 @@ function renderAllShapes() {
   left_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
   // trying animation here
   left_arm.matrix.rotate(-annimation_raise_hand, 1, 0, 0);
+  // adding animation here
+  left_arm.matrix.rotate(shift_animation_hands_up, 1, 0, 0);
   // left_arm.matrix.rotate(arm_horizontal_movement, 0, 1, 0);
   var left_arm_reference_matrix = new Matrix4(left_arm.matrix);
   left_arm.matrix.scale(0.06, 0.05, 0.12);
@@ -398,6 +395,8 @@ function renderAllShapes() {
   left_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
   // trying animation here
   left_forearm_1.matrix.rotate(-annimation_open_hand, 0, 1, 0);
+  // adding shift animation here
+  left_forearm_1.matrix.rotate(- shift_forearm_rotation, 0, 1, 0);
   var left_forearm_1_reference_matrix = new Matrix4(left_forearm_1.matrix);
   left_forearm_1.matrix.scale(0.06, 0.05, 0.20);
   left_forearm_1.render();
@@ -452,6 +451,8 @@ function renderAllShapes() {
   right_arm.matrix.rotate(90, 0, 1, 0);
   right_arm.matrix.rotate(180, 1, 0, 0);
   right_arm.matrix.rotate(- arm_vertical_movement, 1, 0, 0);
+  // adding shift animation
+  right_arm.matrix.rotate(- shift_animation_hands_up, 1, 0, 0);
   var right_arm_reference_matrix = new Matrix4(right_arm.matrix);
   right_arm.matrix.scale(0.06, 0.05, 0.12);
   right_arm.render();
@@ -465,6 +466,8 @@ function renderAllShapes() {
   right_forearm_1.matrix.rotate(-25, 0, 1, 0);
   // rotation based upon the left slider: adding this just for now
   right_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
+  // shift animation here
+  right_forearm_1.matrix.rotate(shift_forearm_rotation, 1, 0, 0);
   var right_forearm_1_reference_matrix = new Matrix4(right_forearm_1.matrix);
   right_forearm_1.matrix.scale(0.06, 0.05, 0.20);
   right_forearm_1.render();
@@ -518,6 +521,8 @@ function renderAllShapes() {
   neck_1.matrix.rotate(neck_front_back, 1, 0, 0);
   // animation here
   neck_1.matrix.rotate(animation_neck_lower, 1, 0, 0);
+  // adding shift animation here
+  neck_1.matrix.rotate(shift_animation_neck, 1, 0, 0);
   var neck_1_reference_matrix = new Matrix4(neck_1.matrix);
   neck_1.matrix.scale(0.07, 0.128, 0.07);
   neck_1.render();
@@ -725,6 +730,13 @@ var annimation_zoom = 1;
 var annimation_raise_hand = 0;
 var annimation_open_hand = 0;
 
+// variables for shift animation
+var shift_animation_rotation = 0;
+var shift_animation_hands_up = 0;
+var shift_animation_neck = 0;
+var shift_forearm_rotation = 0;
+var shift_leg_rotation = 0;
+
 function setAnnimationAngles() {
   // trying to say a hello in the animation
   if (hello_animation_state == 1) {
@@ -824,5 +836,28 @@ function setAnnimationAngles() {
     animation_neck_upper = 0;
     animation_eyebrow = 0;
     annimation_zoom = 1;
+  }
+  if (special_shift_animation == true) {
+    // in this animation, we can rotate WallE quickly and then let it do a quick thing
+    console.log(special_shift_animation)
+    if ((0 < ticker) && (ticker < 60)) {
+      shift_animation_rotation += 3;
+      shift_animation_hands_up += 1;
+      shift_animation_neck += 1;
+      shift_forearm_rotation += 0.5;
+      shift_leg_rotation += 0.0009;
+    } else if ((60 < ticker) && (ticker < 120)) {
+      shift_animation_rotation += 3;
+      shift_animation_hands_up -= 1;
+      shift_animation_neck -= 1;
+      shift_forearm_rotation -= 0.5;
+      shift_leg_rotation -= 0.0009;
+    } else if (ticker > 120) {
+      special_shift_animation = 0;
+      shift_animation_neck = 0;
+      shift_animation_hands_up = 0;
+      shift_animation_rotation = 0;
+      shift_forearm_rotation = 0;
+    }
   }
 }
