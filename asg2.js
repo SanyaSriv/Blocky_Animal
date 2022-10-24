@@ -90,7 +90,7 @@ function renderAllShapes() {
   gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotate.elements);
 
   // setting up the scaling
-  var scaling_mat = new Matrix4().scale(global_scale / 100, global_scale / 100, global_scale / 100);
+  var scaling_mat = new Matrix4().scale((global_scale / 100) * annimation_zoom, (global_scale / 100) * annimation_zoom, (global_scale / 100) * annimation_zoom);
   gl.uniformMatrix4fv(u_GlobalScaleMatrix, false, scaling_mat.elements);
 
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -374,7 +374,7 @@ function renderAllShapes() {
   left_arm.matrix.rotate(90, 0, 1, 0);
   left_arm.matrix.rotate(arm_vertical_movement, 1, 0, 0);
   // trying animation here
-  left_arm.matrix.rotate(-animation_arm_movement, 1, 0, 0);
+  left_arm.matrix.rotate(-annimation_raise_hand, 1, 0, 0);
   // left_arm.matrix.rotate(arm_horizontal_movement, 0, 1, 0);
   var left_arm_reference_matrix = new Matrix4(left_arm.matrix);
   left_arm.matrix.scale(0.06, 0.05, 0.12);
@@ -391,7 +391,7 @@ function renderAllShapes() {
   // rotation based upon the slider
   left_forearm_1.matrix.rotate(left_forearm_rotation, 0, 1, 0);
   // trying animation here
-  left_forearm_1.matrix.rotate(animation_forearm_movement, 0, 1, 0);
+  left_forearm_1.matrix.rotate(-annimation_open_hand, 0, 1, 0);
   var left_forearm_1_reference_matrix = new Matrix4(left_forearm_1.matrix);
   left_forearm_1.matrix.scale(0.06, 0.05, 0.20);
   left_forearm_1.render();
@@ -715,6 +715,9 @@ var animation_fingers_movement = 0;
 var animation_neck_lower = 0;
 var animation_neck_upper = 0;
 var animation_eyebrow = 0;
+var annimation_zoom = 1;
+var annimation_raise_hand = 0;
+var annimation_open_hand = 0;
 
 function setAnnimationAngles() {
   // trying to say a hello in the animation
@@ -725,30 +728,95 @@ function setAnnimationAngles() {
     }
     if ((30 < ticker) && (ticker < 60)) {
       animation_neck_upper += 1; // move lower neck up
-    } if ((60 < ticker) && (ticker < 80)) {
+    }
+    if ((60 < ticker) && (ticker < 80)) {
       animation_neck_upper -= 2;
-    } if ((80 < ticker) && (ticker < 100)) {
+    }
+    if ((80 < ticker) && (ticker < 160)) {
+      annimation_zoom += 0.01
+    }
+    if ((160 < ticker) && (ticker < 190)) {
+      // wait for 30 ticks
+    }
+    if ((190 < ticker) && (ticker < 210)) {
       // now move your eyebrows to represent that wall-e's happy
-      animation_eyebrow -= 0.005;
-    } if ((100 < ticker) && (ticker < 120)) {
+      animation_eyebrow -= 0.007;
+    }
+    if ((210 < ticker) && (ticker < 240)) {
+      // wait for 30 ticks and do nothing in between
+    }
+    if ((240 < ticker) && (ticker < 260)) {
       // now move your eyebrows to represent that wall-e noticed the user
-      animation_eyebrow += 0.005;
-    } if ((120 < ticker) && (ticker < 400)) {
-      animation_arm_movement = 100 * Math.sin(seconds) / 5;
-    } if ((170 < ticker) && (ticker < 200)) {
-        animation_neck_lower += 1; // move lower neck up
-    }if (ticker > 400) {
+      animation_eyebrow += 0.007;
+    }
+    if ((260 < ticker) && (ticker < 280)) {
+      // now move your eyebrows to represent that wall-e's happy
+      animation_eyebrow -= 0.007;
+    }
+    if ((280 < ticker) && (ticker < 310)) {
+      // wait for 30 ticks and do nothing in between
+    }
+    if ((310 < ticker) && (ticker < 330)) {
+      // now move your eyebrows to represent that wall-e noticed the user
+      animation_eyebrow += 0.007;
+    }
+    if ((330 < ticker) && (ticker < 430)) {
+      if (annimation_zoom > 1.000) {
+        annimation_zoom -= 0.01
+      }
+    }
+    // finanly wave
+    if ((430 < ticker) && (ticker < 460)) {
+      annimation_open_hand += 2;
+    }
+    if ((460 < ticker) && (ticker < 490)) {
+      annimation_raise_hand += 2;
+    }
+    // now we will do a hello for 20 ticks
+    if ((490 < ticker) && (ticker < 510)) {
+      annimation_raise_hand -= 1;
+    }
+    if ((510 < ticker) && (ticker < 530)) {
+      annimation_raise_hand += 1;
+    }
+    if ((530 < ticker) && (ticker < 550)) {
+      annimation_raise_hand -= 1;
+    }
+    if ((550 < ticker) && (ticker < 570)) {
+      annimation_raise_hand += 1;
+    }
+
+    if ((570 < ticker) && (ticker < 600)) {
+      annimation_raise_hand -= 2;
+    }
+    // hello done - now resume back to normal position
+    if ((600 < ticker) && (ticker < 630)) {
+      annimation_open_hand -= 2;
+    }
+
+    // return back to the original position of the neck
+    if ((630 < ticker) && (ticker < 660)) {
+      animation_neck_lower += 1;
+    }
+
+    if ((660 < ticker) && (ticker < 670)) {
+      animation_neck_upper += 1;
+    }
+
+    if (ticker > 700) {
       // at this point 1 set of animation is complete, and we can loop over this again
       // reset
       ticker = 0;
       animation_neck_lower = 0;
       animation_neck_upper = 0;
       animation_eyebrow = 0;
+      // annimation_zoom = 1;
     }
   } else {
     animation_arm_movement = 0;
     animation_neck_lower = 0;
     animation_neck_upper = 0;
     animation_eyebrow = 0;
+    annimation_zoom = 1;
   }
 }
